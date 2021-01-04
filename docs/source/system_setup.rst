@@ -10,27 +10,36 @@ The Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 is ideal for pro
 
 .. warning:: This kit can radiate radio frequency energy and has not been tested for CE, FCC, or IC compliance. The intended use is for demonstration, engineering development, or evaluation purposes. See :ref:`compliance`
 
+Required Equipment
+------------------
+In addition to the mmWave kit, you will need the following.
+
+* Laptop or PC running Windows 10 OS
+* Bench power supply for 12V, 2A min 
+* 40GHz Spectrum analyzer for Transmitter tests
+* 40GHz Signal generator for Receiver tests
+
+
 Install RFSoC Explorer
 ----------------------
 Avnet RFSoC Explorer provides native connection to MATLAB ® and Simulink ®, featuring graphical control of the platform and intuitive APIs for programmatic access.
 
 .. image:: images_system_setup/rfsocX-concept.jpg
 
-You will need a computer running Windows 10 OS and the following MathWorks software. 
+Your computer will need the following MathWorks software. 
+
+* MATLAB R2020b or later 
+* DSP System Toolbox
+* Fixed-Point Designer
+* Communications Toolbox
+* Communications Toolbox Support Package for Xilinx Zynq-Based Radio
+* Signal Processing Toolbox
+* LTE Toolbox (optional)
+* 5G Toolbox (optional)
 
 `Get a Free MATLAB Trial Package for RFSoC <https://www.mathworks.com/rfsoc>`_
 
-   * MATLAB R2020b or later 
-   * DSP System Toolbox
-   * Fixed-Point Designer
-   * Communications Toolbox
-   * Communications Toolbox Support Package for Xilinx Zynq-Based Radio
-   * Signal Processing Toolbox
-   * LTE Toolbox (optional)
-   * 5G Toolbox (optional)
-
-
-RFSoC Explorer installs easily in the MATLAB APPS tab without modifying your registry or other applications.
+RFSoC Explorer installs easily using the MATLAB Add-Ons store.
 
 1)	From **MATLAB > Add-Ons**, search for **Avnet RFSoC Explorer** and click install
 2)	From **MATLAB > Add-Ons**, search for **Communications Toolbox Support Package for Xilinx Zynq-Based Radio** and click install
@@ -45,10 +54,21 @@ The Xilinx ZCU208 Evaluation Kit has many jumpers and switches that are shipped 
 .. image:: images_system_setup/hw-setup.jpg
 
 #. Connect the Otava DTRX2 mmWave Card, the ZCU208, and cables as shown in the picture
-
+#. Use the inlcuded screws to attach the CLK104 and DTRX2 cards to the ZCU208 base board
 #. Plug Ethernet and USB cables into your host PC
+#. **DO NOT CONNECT POWER TO THE DTRX2 CARD** (this will be done later)
+#. Use a Carlisle SMA cable from the ZCU208 kit to connect the CLK104 OUTPUT_REF (J10) to the DTRX2 REF CLK IN (J21). 
 
-#. Set the ZCU208 DIP switches (SW6) as shown in the figure below, which allows the ZCU208 board to boot from the SD card
+.. note:: For reference clock spurious mitigation, it is recommended to also use a 10dB coaxial attenuator between the CLK104 output and the REF_CLK_IN input on the DTRX2 card
+
+6. Connect DTRX2 RF inputs/outputs to test equipment using 2.92mm mmW coaxial cables
+
+* TX output @ J3 (Ch1) and J6 (Ch2)
+* RX input @ J10 (Ch1) and J15 (Ch2)
+
+.. note:: All unused channels on DTRX2 must be connected to 50 ohm terminations.
+
+7. Set ZCU208 to boot from the SD card by setting (SW6) switches as shown below
 
 .. image:: images_system_setup/zcu208-dip-sw.png
 
@@ -64,6 +84,8 @@ SD Card
 
 Boot ZCU208
 ------------
+#. Ensure no power is applied to DTRX2
+
 #. Turn the ZCU208 power switch ON (near the 12V connector) 
 
 #. The application auto-start function creates an IP connection for the board at address **169.254.10.2**. 
