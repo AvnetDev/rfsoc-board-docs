@@ -98,12 +98,31 @@ Boot ZCU208
 
 .. note:: The auto-start IP address can be changed in the autostart.sh file on your SD card. 
 
+Configure CLK104 Module
+------------------------
+The CLK104 module provides an ultra low-noise, wideband RF clock source for the ZCU208 RF-ADCs and RF-DACs. We configure CLK104 to ouptut a coherent reference for the DTRX2 LO PLLs.
 
+#. Open MATLAB and start RFSoC Explorer
+#. Select the 'ZCU208 + DTRX2' option
+#. On the Main tab, enter the IP address of the ZCU208
+#. Select **CLK104 Configuration > 122.88MHz REFCLKOUT_10MHz TCXO REF**
+
+.. image:: images_system_setup/clk104_config.jpg
+    :scale: 75%
+
+.. note:: The **122.88MHz REFCLKOUT_10MHz TCXO REF** configuration uses the CLK104 on-board 10MHz TCXO reference for the LMK04828B. If you wish to synchronize the setup up to a test instrument 10MHz clock, use the **122.88MHz REFCLKOUT_10MHz EXT REF** configuration (typically useful for EVM measurements). 
+
+Power Up DTRX2
+---------------
+#. Connect your test equipment to the DTRX2 RF and TX ports. All unused channels should be terminated with a 2.92mm 50 ohms termination.
+#. Apply 12V DC power to the DTRX2 card.
+
+Both D4 and D6 "Power Good" red LEDs should be lit. The idle current drawn from the 12V supply should be about 45mA.
 
 .. _compliance:
 
-Regulatory Compliance Information
------------------------------------
+Regulatory Compliance
+---------------------
 This kit can radiate radio frequency energy and has not been tested for CE, FCC, or IC compliance. The intended use is for demonstration, engineering development, or evaluation purposes.
 
 FCC WARNING
