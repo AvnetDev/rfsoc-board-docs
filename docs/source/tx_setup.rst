@@ -43,3 +43,7 @@ This user interface also models the expected signal post DUC or post interpolati
 With the DAC output IF frequency set at 4.2GHz, and the TX LO PLL running at 14.6GHz, the mixer generates 2 sidebands, including the wanted signal at 25GHz. Some amount of LO leakage also leaks out at 2x LO or 29.2GHz. See below the major output tones out of the transmit chain (2x multiplication inside the mixer LO chain)
 
 **Add picture of the expected major tones**
+
+The picture below shows a wideband spectrum plot for a wanted signal at 26GHz, on an FSW43 spectrum analyzer:
+
+.. image:: images_tx_setup/26G_TX_widespan.png
