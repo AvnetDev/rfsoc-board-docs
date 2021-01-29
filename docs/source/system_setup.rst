@@ -1,6 +1,6 @@
 Introduction
 -------------
-This document will show you how to get started with the Avnet Wideband mmWave Radio Dev Kit for RFSoC Gen-3. Follow the step-by-step instructions to configure the kit, setup your computer, and use Avnet RFSoC Explorer® in MATLAB to generate and acquire signals through the Otava mmWave Dual Trancseiver RF Card.
+This document will show you how to get started with the `Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 <https://www.avnet.com/rfsoc-mmw>`_. Follow the step-by-step instructions to configure the kit, setup your computer, and use Avnet RFSoC Explorer® in MATLAB to generate and acquire signals through the Otava DTRX2 Dual Transceiver mmWave Radio Card.
 
 .. image:: images_system_setup/zcu208_dtrx2_kit.png
 
@@ -75,9 +75,13 @@ The Xilinx ZCU208 Evaluation Kit has many jumpers and switches that are shipped 
 
 SD Card
 -------
+The ZCU208 requires custom software to control DTRX2 card via RFSoC Explorer.
+
 #. Remove the SD card from the ZCU208, insert into your PC, and format as FAT using a tool like `SD Memory Card Formatter <https://www.sdcard.org/downloads/formatter_4/>`_
 
-#. Download the file **avnet_rfsocX_zcu111_boot_v1_0.zip** This archive contains the software for the ZCU111 evaluation board. Unzip the archive to a convenient location on your hard disk, then copy the files to the root level of the SD card. 
+#. Download the file **avnet_rfsocX_zcu208_boot_v1_0.zip** @ *>>> TBC SURL <<<*
+
+#. Unzip the archive and copy the files to the root level of the SD card. 
 
 #. Safely eject the SD card from the PC and replace into ZCU208.
 
