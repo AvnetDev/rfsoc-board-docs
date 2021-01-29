@@ -28,12 +28,17 @@ ZCU208 RFSOC DAC configuration and signal generation
 
 Let’s start with the DAC2 and configure it as shown in this table:
 
--	Check that the Tile clock is set to 6144MHz (DAC sampling rate)
--	Click on the ON button on the right 
--	Enter the IF frequency of operation in the "Analog Fc(MHz)" field: here 4200MHz, which will also be used to set the RFSOC DUC NCO frequency based on the sampling rate  
--	Enter the interpolation rate: 8x
--	Now to send a CW tone: in the Signal Source section, set the sinewave frequency and its level relative to full scale. In this example, we’ll use a 10MHz baseband tone at -5dBFS
--	The Configure button on the right should be highlighted in red, signaling that you need to configure the DAC before being able to download the waveform to the RFSOC. So hit the “Configure” button, then hit download, after the configuration is complete. You should see a display of the I and Q waveform in the graph below, on the GUI DAC page.
+.. image:: images_tx_setup/DACs_config_table.png
+
+#. Check that the Tile clock (DAC sampling rate) is set to 6144MHz (DAC sampling rate)
+#. Click on the ON button on the right 
+#. Enter the IF frequency of operation in the "Analog Fc(MHz)" field: here 4200MHz, which will also be used to set the RFSOC DUC NCO frequency based on the sampling rate  
+#. Enter the interpolation rate: 8x
+#. Now to send a CW tone: in the Signal Source section, set the sinewave frequency and its level relative to full scale. In this example, we’ll use a 10MHz baseband tone at -5dBFS
+#. The Configure button on the right should be highlighted in red, signaling that you need to configure the DAC before being able to download the waveform to the RFSOC. So hit the “Configure” button, then hit download, after the configuration is complete. You should see a display of the I and Q waveform in the graph below, on the GUI DAC page.
+
+Note that you may also display the frequency domain response of the signal being loaded by toggling the **Time-Frequency** button above the graph.
+This user interface also models the expected signal post DUC or post interpolating FIR filter: toggle the **Baseband-DUC** output button
 
 With the DAC output IF frequency set at 4.2GHz, and the TX LO PLL running at 14.6GHz, the mixer generates 2 sidebands, including the wanted signal at 25GHz. Some amount of LO leakage also leaks out at 2x LO or 29.2GHz. See below the major output tones out of the transmit chain (2x multiplication inside the mixer LO chain)
 
