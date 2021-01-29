@@ -81,13 +81,19 @@ DTRX2 Hardware connections
 At this point, the mmW radio card has only been attached to the ZCU208 platform.
 Before power-up, you will need to:
 
-#. Use one of the provided short SMA coax cables to connect the 122.88MHz reference clock signal on CLK104 module (J10 connector, labeled OUTPUT_REF)  to the DTRX2 input reference clock SMA (J21, labeled REF_CLK_IN). For Ref clock spurious mitigation, it is recommended to also use a 10dB coaxial attenuator between the CLK104 output and the REF_CLK_IN input on the DTRX2 card, or a coaxial harmonic filter with a cut-off frequency above 150MHz.
+#. Use one of the provided short SMA coax cables to connect the 122.88MHz reference clock signal on CLK104 module (J10 connector, labeled OUTPUT_REF)  to the DTRX2 input reference clock SMA (J21, labeled REF_CLK_IN). For reference clock spurious mitigation, it is recommended to also use a 10dB coaxial attenuator between the CLK104 output and the REF_CLK_IN input on the DTRX2 card, or a coaxial harmonic filter with a cut-off frequency above 150MHz.
 
 #. Connect the RF input and output port (J3 or J6 for the TX chains, and J10, J15 for the RX chains) to the test equipment using a 2.92mm compatible mmW coaxial cable. 
 
 #. Terminate the unused RF ports with a 2.92mm 50 ohms termination.
 
-#. Finally, connect the DTRX2 to a 12V power supply using the DC cables provided. Do not turn ON the power supply until the ZCU208 has finished booting.
+#. Finally, connect the DTRX2 to a 12V power supply using the DC cables provided. 
+
+**Do not turn ON the power supply until the ZCU208 has finished booting.** (See next section of this document)
+
+The following picture illustrates all these hardware connections:
+
+.. image:: images_system_setup/Hardware_connections.png
 
 
 Boot ZCU208
@@ -124,9 +130,11 @@ Select the configuration file that refers to the on-board 10MHz TCXO reference, 
 
 If you wish to synchronize the setup up to a test instrument 10MHz clock, a configuration file is also provided, called **‘122.88MHz REFCLKOUT_10MHz EXT REF’** . This will be useful for EVM measurements.  
 
-Connect the signal path under test to either the spectrum analyzer for TX chain measurements or to the signal generator for RX chain evaluations. All the unused channels should be terminated with a 2.92mm 50 ohms termination.
+As mentioned earlier, make sure you've connected signal path under test to either the spectrum analyzer for TX chain measurements or to the signal generator for RX chain evaluations. 
 
-Turn ON the 12V DC power to the DTRX2 card. Both D4 and D6 LED should be lit (Red color)
+**Again, all the unused channels should be terminated with a 2.92mm 50 ohms termination.**
+
+You may now turn ON the 12V DC power to the DTRX2 card. Both D4 and D6 LED should be lit (Red color)
 
 The idle current drawn off the 12V supply should be about 45mA.
 
