@@ -1,6 +1,6 @@
 Introduction
 -------------
-This document will show you how to get started with the Avnet Wideband mmWave Radio Dev Kit for RFSoC Gen-3. Follow the step-by-step instructions to configure the kit, setup your computer, and use Avnet RFSoC Explorer® in MATLAB to generate and acquire signals through the Otava mmWave Dual Trancseiver RF Card.
+This document will show you how to get started with the `Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 <https://www.avnet.com/rfsoc-mmw>`_. Follow the step-by-step instructions to configure the kit, setup your computer, and use Avnet RFSoC Explorer® in MATLAB to generate and acquire signals through the Otava DTRX2 Dual Transceiver mmWave Radio Card.
 
 .. image:: images_system_setup/zcu208_dtrx2_kit.png
 
@@ -10,27 +10,36 @@ The Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 is ideal for pro
 
 .. warning:: This kit can radiate radio frequency energy and has not been tested for CE, FCC, or IC compliance. The intended use is for demonstration, engineering development, or evaluation purposes. See :ref:`compliance`
 
+Required Equipment
+------------------
+In addition to the mmWave kit, you will need the following.
+
+* Laptop or PC running Windows 10 OS
+* Bench power supply for 12V, 2A min 
+* 40GHz Spectrum analyzer for Transmitter tests
+* 40GHz Signal generator for Receiver tests
+
+
 Install RFSoC Explorer
 ----------------------
 Avnet RFSoC Explorer provides native connection to MATLAB ® and Simulink ®, featuring graphical control of the platform and intuitive APIs for programmatic access.
 
 .. image:: images_system_setup/rfsocX-concept.jpg
 
-You will need a computer running Windows 10 OS and the following MathWorks software. 
+Your computer will need the following MathWorks software. 
+
+* MATLAB R2020b or later 
+* DSP System Toolbox
+* Fixed-Point Designer
+* Communications Toolbox
+* Communications Toolbox Support Package for Xilinx Zynq-Based Radio
+* Signal Processing Toolbox
+* LTE Toolbox (optional)
+* 5G Toolbox (optional)
 
 `Get a Free MATLAB Trial Package for RFSoC <https://www.mathworks.com/rfsoc>`_
 
-   * MATLAB R2020b or later 
-   * DSP System Toolbox
-   * Fixed-Point Designer
-   * Communications Toolbox
-   * Communications Toolbox Support Package for Xilinx Zynq-Based Radio
-   * Signal Processing Toolbox
-   * LTE Toolbox (optional)
-   * 5G Toolbox (optional)
-
-
-RFSoC Explorer installs easily in the MATLAB APPS tab without modifying your registry or other applications.
+RFSoC Explorer installs easily using the MATLAB Add-Ons store.
 
 1)	From **MATLAB > Add-Ons**, search for **Avnet RFSoC Explorer** and click install
 2)	From **MATLAB > Add-Ons**, search for **Communications Toolbox Support Package for Xilinx Zynq-Based Radio** and click install
@@ -45,25 +54,42 @@ The Xilinx ZCU208 Evaluation Kit has many jumpers and switches that are shipped 
 .. image:: images_system_setup/hw-setup.jpg
 
 #. Connect the Otava DTRX2 mmWave Card, the ZCU208, and cables as shown in the picture
-
+#. Use the inlcuded screws to attach the CLK104 and DTRX2 cards to the ZCU208 base board
 #. Plug Ethernet and USB cables into your host PC
+#. **DO NOT CONNECT POWER TO THE DTRX2 CARD** (this will be done later)
+#. Use a Carlisle SMA cable from the ZCU208 kit to connect the CLK104 OUTPUT_REF (J10) to the DTRX2 REF CLK IN (J21). 
 
-#. Set the ZCU208 DIP switches (SW6) as shown in the figure below, which allows the ZCU208 board to boot from the SD card
+.. note:: For reference clock spurious mitigation, it is recommended to also use a 10dB coaxial attenuator between the CLK104 output and the REF_CLK_IN input on the DTRX2 card
+
+6. Connect DTRX2 RF inputs/outputs to test equipment using 2.92mm mmW coaxial cables
+
+* TX output @ J3 (Ch1) and J6 (Ch2)
+* RX input @ J10 (Ch1) and J15 (Ch2)
+
+.. note:: All unused channels on DTRX2 must be connected to 50 ohm terminations.
+
+7. Set ZCU208 to boot from the SD card by setting (SW6) switches as shown below
 
 .. image:: images_system_setup/zcu208-dip-sw.png
 
 
 SD Card
 -------
+The ZCU208 requires custom software to control DTRX2 card via RFSoC Explorer.
+
 #. Remove the SD card from the ZCU208, insert into your PC, and format as FAT using a tool like `SD Memory Card Formatter <https://www.sdcard.org/downloads/formatter_4/>`_
 
-#. Download the file **avnet_rfsocX_zcu111_boot_v1_0.zip** This archive contains the software for the ZCU111 evaluation board. Unzip the archive to a convenient location on your hard disk, then copy the files to the root level of the SD card. 
+#. Download the file **avnet_rfsocX_zcu208_boot_v1_0.zip** @ *>>> TBC SURL <<<*
+
+#. Unzip the archive and copy the files to the root level of the SD card. 
 
 #. Safely eject the SD card from the PC and replace into ZCU208.
 
 
 Boot ZCU208
 ------------
+#. Ensure no power is applied to DTRX2
+
 #. Turn the ZCU208 power switch ON (near the 12V connector) 
 
 #. The application auto-start function creates an IP connection for the board at address **169.254.10.2**. 
@@ -76,12 +102,31 @@ Boot ZCU208
 
 .. note:: The auto-start IP address can be changed in the autostart.sh file on your SD card. 
 
+Configure CLK104 Module
+------------------------
+The CLK104 module provides an ultra low-noise, wideband RF clock source for the ZCU208 RF-ADCs and RF-DACs. We configure CLK104 to ouptut a coherent reference for the DTRX2 LO PLLs.
 
+#. Open MATLAB and start RFSoC Explorer
+#. Select the 'ZCU208 + DTRX2' option
+#. On the Main tab, enter the IP address of the ZCU208
+#. Select **CLK104 Configuration > 122.88MHz REFCLKOUT_10MHz TCXO REF**
+
+.. image:: images_system_setup/clk104_config.jpg
+    :scale: 75%
+
+.. note:: The **122.88MHz REFCLKOUT_10MHz TCXO REF** configuration uses the CLK104 on-board 10MHz TCXO reference for the LMK04828B. If you wish to synchronize the setup up to a test instrument 10MHz clock, use the **122.88MHz REFCLKOUT_10MHz EXT REF** configuration (typically useful for EVM measurements). 
+
+Power Up DTRX2
+---------------
+#. Connect your test equipment to the DTRX2 RF and TX ports. All unused channels should be terminated with a 2.92mm 50 ohms termination.
+#. Apply 12V DC power to the DTRX2 card.
+
+Both D4 and D6 "Power Good" red LEDs should be lit. The idle current drawn from the 12V supply should be about 45mA.
 
 .. _compliance:
 
-Regulatory Compliance Information
------------------------------------
+Regulatory Compliance
+---------------------
 This kit can radiate radio frequency energy and has not been tested for CE, FCC, or IC compliance. The intended use is for demonstration, engineering development, or evaluation purposes.
 
 FCC WARNING
