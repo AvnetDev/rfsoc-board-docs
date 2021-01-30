@@ -7,7 +7,9 @@ Set the spectrum analyzer center frequency to 25GHz then, to observe the signal 
 
 From the RFSOC Explorer application, go to the “Otava DTRX” tab and hit the **“TX Power up”** button. This powers-up both TX channels and performs a default configuration of the 2 RF transmit channels.
 
-**Insert picture of the RFSOC Explorer DTRX2 page**
+::
+
+  Insert picture of the RFSOC Explorer DTRX2 page
 
 The average current drawn on the 12V supply should then be about 760mA. 
 
