@@ -85,9 +85,6 @@ The ZCU208 requires custom software to control DTRX2 card via RFSoC Explorer.
 
 #. Safely eject the SD card from the PC and replace into ZCU208.
 
-.. image:: images_system_setup/Hardware_connections.png
-
-
 Boot ZCU208
 ------------
 #. Ensure no power is applied to DTRX2
