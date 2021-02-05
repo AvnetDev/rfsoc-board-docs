@@ -1,9 +1,36 @@
 Transmitter Configuration and operation
 =======================================
 
-In this procedure, we will run the transmitters to the default mmW output frequency of 25GHz. 
+In this procedure, we will go over the steps to power up and program the ZCU208+DTRX2 radio kit in **trasnmit mode**. The DTRX2 card transmitters will be run in their default states, operating at a default RF modulation frequency of 25GHz.
 
-Set the spectrum analyzer center frequency to 25GHz then, to observe the signal transmitted after power up.
+The DTRX2 radio card signal chains
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following diagram shows details of the TX signal chains of the DTRX2 card. 
+
+.. image:: images_tx_setup/TX_signal_chains.png
+
+
+The DTRX2 radio card implements 2 identical super-heterodyne TX chains, with their own dedicated PLL. 
+
+The TX paths implement a wideband variable gain RF front-end with a 0.5dB step RF attenuator.
+
+It is also possible to enable/disable each of these signal paths individually via software, by control of the amplifiers power-down pins. 
+
+Please note the specific DAC tiles used on the RFSOC-Gen3 device shown in the diagram above. 
+
+The RF band-select filter has been left out of this design to enable wideband RF coverage, but should be added to isolate the targeted sideband. 
+
+The up converter mixers are 2xLO sub-harmonic passive mixers. Therefore, TX LO PLL device only needs to provide an LO signal at half the required frequency range. 
+It is also possible, via software, and within the specified range, to change the IF center frequency to target better pass-band response or mixing spurious performance, depending on the operating RF frequency.
+
+Each of these signal chains also have provisions for various RF access points (shown as red dots on the block diagram). Hardware modification is required to route the RF signals to these test points, by moving an AC coupling capacitor. These test points are not populated by default.
+
+
+Power-up steps via the RFSOC Explorer tool
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Before powering up the radio, set the spectrum analyzer center frequency to 25GHz to observe the signal transmitted. You may have to adjust the attenuation level on the analyzer.
 
 From the RFSOC Explorer application, go to the “Otava DTRX” tab and hit the **“TX Power up”** button. This powers-up both TX channels and performs a default configuration of the 2 RF transmit channels.
 

@@ -1,14 +1,40 @@
 Receivers Configuration and Operation
 ====================================
 
-In this procedure, we will power up and program the DTRX2 card receivers to their default states. The default RF demodulation frequency is 25GHz.
+In this procedure, we will go over the steps to power up and program the ZCU208+DTRX2 radio kit in **receive mode**. The DTRX2 card receivers will be run in their default states, operating at a default RF demodulation frequency of 25GHz.
 
-Before powering up the RX chains, connect one of the RF inputs (RX1 or RX2) to a signal source, using a mmW-grade 2.92mm coaxial cable, and terminate the other one with a 50 ohms termination. 
+The DTRX2 radio card signal chains
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following diagram shows details of the RX signal chains of the DTRX2 card. 
+
+.. image:: images_rx_setup/RX_signal_chains.png
+
+
+The DTRX2 radio card implements 2 identical super-heterodyne RX chains, with their own dedicated PLL. 
+
+The RX paths implement a wideband variable gain RF front-end with a coarse step attenuator at RF, ahead of the downconverting mixer, along with a wideband IF chain with fine step gain control as well.
+
+It is also possible to enable/disable each of these signal paths individually via software, by control of the amplifiers power-down pins. 
+
+Please note the specific ADCs tiles used on the RFSOC-Gen3 device shown in the diagram above. 
+
+The RF band-select filter has been left out of this design to enable wideband RF coverage, but should be added to isolate the targeted sideband. This signal chain also doesn't include the front-end LNA, which may be connected externally.
+
+The down converter mixers are 2xLO sub-harmonic passive mixers. Therefore, RX LO PLL device only needs to provide an LO signal at half the required frequency range. 
+It is also possible, via software, and within the specified range, to change the IF center frequency to target better pass-band response or mixing spurious performance, depending on the operating RF frequency.
+
+Each of these signal chains also have provisions for various RF access points (shown as red dots on the block diagram). Hardware modification is required to route the RF signals to these test points, by moving an AC coupling capacitor. These test points are not populated by default.
+
+
+Power-up steps via the RFSOC Explorer tool
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Before powering up the RX chains, connect one of the RF inputs (RX1 or RX2 ports, labelled on the board) to a signal source, using a mmW-grade 2.92mm coaxial cable, and terminate the other one with a 50 ohms termination. 
 
 Do not feed any RF signal until the RF chains have been powered up and the RFSOC ADCs have been configured, as described in the sections below. 
 
 For the example described here, set the signal generator in CW mode, at 25.01GHz (for a 10MHz baseband frequency tone), and set the power level to -25dBm.
-Then use a 2.92mm coax cable to connect to the RX channel 1 or the **RX1** connector labelled on the DTRX2 card. 
 
 From the RFSOC Explorer application, go to the **“Otava DTRX”** tab in the RFSOC Explorer and click the **“RX Power up”** button on the bottom left of the page (see image below). This powers-up and performs a default configuration of the 2 receive channels. 
 
@@ -86,16 +112,25 @@ You may also use the **"Spectrum Analyzer" ON-OFF** button, in the Signal Plot s
 
 ::
 
-    ***INSERT PICTURE*** to show that
+    ***Example to be added here*** 
 
 At any time here, you may adjust the target RF frequency, the IF frequency, the target instantaneous bandwidth or the RF attenuator setting, as shown in the picture below. Also remember that after the RX chains have been powered up, all the RF/IF attenuators are set to max attenuation levels. 
 
 .. image:: images_rx_setup/RFSOCX_DTRX2_RX_instructions2.png
 
 The GUI software automatically calculates the PLL or VCO output frequency based on the wanted RF frequency and IF frequency. 
-You’ll need to hit the **“Update PLL”** button every time you change the RF, IF, BW frequencies to program the PLL accordingly.
+You’ll need to hit the **“Update PLL”** button every time you change the RF center frequency or the IF frequency or the targeted signal bandwidth, to program the PLL accordingly.
 
-To enable or disable individual signal chains: use the ON/OFF buttons on the left of each illustrated signal chains. One button controls the RF amplifier and the other one control both IF amplifiers.
+The **"Signal Bandwidth"** entry field is an estimate of the received signal bandwidth and doesn't need to be accurate.  It is mostly used to make sure the edges of the signal still fall within the availble IF pass-band, at a particular IF center frequency. 
+
+Here's an example:
+    - The DTRX2 IF frequency range of the DTRX2 is typically 3.2-4.4GHz
+    - If the Signal BW = 50MHz, then the user may set the IF frequency anywhere between 3.225GHz and 4.375GHz
+    - If the Signal BW = 400MHz, then the range of possible IF center frequencies is more restricted, within 3.4-4.2GHz 
+
+For a received CW tone, you may leave this "Signal Bandwidth" parameter to the default value of 50MHz or set it as low as 1MHz. 
+
+Finally, to enable or disable individual signal chains: use the ON/OFF buttons on the left of each illustrated signal chains. One button controls the RF amplifier and the other one control both IF amplifiers.
 
 
 RX channels gain budget over RF frequency
