@@ -1,7 +1,7 @@
 Transmitter Configuration and operation
 =======================================
 
-In this procedure, we will go over the steps to power up and program the ZCU208+DTRX2 radio kit in **trasnmit mode**. The DTRX2 card transmitters will be run in their default states, operating at a default RF modulation frequency of 25GHz.
+In this procedure, we will go over the steps to power up and program the ZCU208+DTRX2 radio kit in **transmit mode**. The DTRX2 card transmitters will be run in their default states, operating at a default RF modulation frequency of 25GHz.
 
 The DTRX2 radio card signal chains
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -21,7 +21,7 @@ Please note the specific DAC tiles used on the RFSOC-Gen3 device shown in the di
 
 The RF band-select filter has been left out of this design to enable wideband RF coverage, but should be added to isolate the targeted sideband. 
 
-The up converter mixers are 2xLO sub-harmonic passive mixers. Therefore, TX LO PLL device only needs to provide an LO signal at half the required frequency range. 
+The up-converter mixers are 2xLO sub-harmonic passive mixers. Therefore, TX LO PLL device only needs to provide an LO signal at half the required frequency range. 
 It is also possible, via software, and within the specified range, to change the IF center frequency to target better pass-band response or mixing spurious performance, depending on the operating RF frequency.
 
 Each of these signal chains also have provisions for various RF access points (shown as red dots on the block diagram). Hardware modification is required to route the RF signals to these test points, by moving an AC coupling capacitor. These test points are not populated by default.
@@ -90,7 +90,7 @@ This user interface also models the expected signal post DUC or post interpolati
 
 With the DAC output IF frequency set at 4.2GHz, and the TX LO PLL running at 14.6GHz, the mixer generates 2 sidebands, including the wanted signal at 25GHz. Some amount of LO leakage also leaks out at 2x LO or 29.2GHz (2x multiplication inside the mixer LO chain).
 
-The picture below shows an 18GHz wide spectrum plot for a wanted signal at 26GHz, on an Rhode&Schwarz FSW43 spectrum analyzer. Because this radio has intentionnaly been designed to allow for a wide range of both IF and RF frequencies, the IF filter has limited selectivity, and the user needs to use an external RF pass-band filter to select the wanted sideband. 
+The picture below, taken on a Rhode&Schwarz FSW43 spectrum analyzer, shows an 18GHz wide spectrum plot for a wanted signal at 26GHz, on an Rhode&Schwarz FSW43 spectrum analyzer. Because this radio has intentionnaly been designed to allow for a wide range of both IF and RF frequencies, the IF filter has limited selectivity, and the user needs to use an external RF pass-band filter to select the wanted sideband. 
 
 
 .. image:: images_tx_setup/26G_TX_widespan.png
