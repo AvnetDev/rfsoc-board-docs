@@ -116,8 +116,9 @@ Modulated signal generation
 
 The Signal Source section of the GUI, highlighted in yellow in the following picture, has a drop-down menu where you can select any .mat file to play thru the ZCU208, or choose one of the available Matlab Apps to define and configure any QAM or OFDM waveforms [select ‘Wireless Waveform’]. 
 
-** Add picture of the drop-down waveforms options**
+**Add picture of the drop-down waveforms options**
 
+.. note::  **When loading and playing your own .mat complex signal vectors:**  The Xilinx RF Evaluation Tool programmable logic is designed to process 16-sample vectors between the PS and the PL. Therefore it is recommended to size the Matlab formated signals as multiple of 16 samples. This avoids automatic zero-padding by the RFSOC Explorer tool, which may show up as transition spurs in the frequency domain.
 
 To **power down** the setup, follow these steps in this order:
 
