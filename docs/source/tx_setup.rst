@@ -1,15 +1,40 @@
-Transmitter Configuration and operation
+Transmitter Configuration and Operation
 =======================================
 
-In this procedure, we will run the transmitters to the default mmW output frequency of 25GHz. 
+In this procedure, we will go over the steps to power up and program the ZCU208+DTRX2 radio kit in **transmit mode**. The DTRX2 card transmitters will be run in their default states, operating at a default RF modulation frequency of 25GHz.
 
-Set the spectrum analyzer center frequency to 25GHz then, to observe the signal transmitted after power up.
+The DTRX2 radio card transmit signal chains
+----------------------------------
 
-From the RFSOC Explorer application, go to the “Otava DTRX” tab and hit the **“TX Power up”** button. This powers-up both TX channels and performs a default configuration of the 2 RF transmit channels.
+The following diagram shows details of the TX signal chains of the DTRX2 card. 
 
-::
+.. image:: images_tx_setup/TX_signal_chains.png
 
-  Insert picture of the RFSOC Explorer DTRX2 page
+
+The DTRX2 radio card implements 2 identical super-heterodyne TX chains, with their own dedicated PLL. 
+
+The TX paths implement a wideband variable gain RF front-end with a 15.5dB range, 0.5dB step RF attenuator.
+
+It is also possible to enable/disable each of these signal paths individually via software, by control of the amplifiers power-down pins. 
+
+Please note the specific DAC tiles used on the RFSOC-Gen3 device shown in the diagram above. 
+
+The RF band-select filter has been left out of this design to enable wideband RF coverage, but should be added to isolate the targeted sideband. 
+
+The up-converter mixers are 2xLO sub-harmonic passive mixers. Therefore, TX LO PLL device only needs to provide an LO signal at half the required frequency range. 
+It is also possible, via software, and within the specified range, to change the IF center frequency to target better pass-band response or mixing spurious performance, depending on the operating RF frequency.
+
+Each of these signal chains also have provisions for various RF access points (shown as red dots on the block diagram). Hardware modification is required to route the RF signals to these test points, by moving an AC coupling capacitor. These test points are not populated by default.
+
+
+Power-up steps via the RFSOC Explorer tool
+------------------------------------------
+
+Before powering up the radio, set the spectrum analyzer center frequency to 25GHz to observe the signal transmitted. You may have to adjust the attenuation level on the analyzer.
+
+From the RFSOC Explorer application, go to the “Otava DTRX” tab and hit the **“TX Power up”** button (as highlighted in red box below). This powers-up both TX channels and performs a default configuration of the 2 RF transmit channels. The following picture shows the TX channels power-up states.
+
+.. image:: images_tx_setup/RFSOCX_DTRX2_TX_PowerUp.png
 
 The average current drawn on the 12V supply should then be about 760mA. 
 
@@ -28,7 +53,7 @@ How to configure and program the RFSOC DACs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Go back to the main tab of the RFSOC Explorer tool
-#. Hit the ON button for the DAC tile 0 228 and wait for the initialization to complete (may take 30 seconds)
+#. Hit the ON button for the DAC tile 0 228 (top left corner) and wait for the initialization to complete (may take 30 seconds)
 #. Then click on the highlighted DACs icons after the prompt, which brings you to the DAC configuration page, shown below.
 
 .. image:: images_tx_setup/RFSOCX_RFSOC_DACs_cntrl_page.jpg
@@ -40,10 +65,11 @@ How to configure and program the RFSOC DACs
 Let’s start with the DAC2 and configure it as shown in this table:
 
 .. image:: images_tx_setup/DACs_config_table_2.png
+    :scale: 50%
 
 #. Check that the Tile clock (DAC sampling rate) is set to 6144MHz 
 #. Click on the ON radio button on the right of DAC2
-#. Enter the IF frequency of operation in the "Analog Fc(MHz)" field: here 4200MHz, which will also be used to set the RFSOC DUC NCO frequency based on the sampling rate  
+#. Enter the IF frequency of operation in the "Analog Fc (MHz)" field: here 4200MHz, which will also be used to set the RFSOC DUC NCO frequency based on the sampling rate  
 #. Enter the interpolation rate: 8x
 
 
@@ -55,7 +81,7 @@ At this point, the **Configure** button should highlighted in red, but before we
 In the **Signal Source** section, on the left of the page, set the sinewave frequency and its level relative to full scale. 
 In this example, we’ll use a 10MHz baseband tone at -5dBFS
 
-Now, hit the **Configure** button, then hit download, after the configuration is complete ("Configure button has turned green). 
+Now, hit the **Configure** button, then hit the **Download** button underneath, after the configuration is complete ("Configure button has turned green). 
 You should see a display of the I and Q waveform in the graph below, on the GUI DAC page.
 
 Note that you may also display the frequency domain response of the signal being loaded by toggling the **Time-Frequency** button above the graph.
@@ -63,7 +89,7 @@ This user interface also models the expected signal post DUC or post interpolati
 
 With the DAC output IF frequency set at 4.2GHz, and the TX LO PLL running at 14.6GHz, the mixer generates 2 sidebands, including the wanted signal at 25GHz. Some amount of LO leakage also leaks out at 2x LO or 29.2GHz (2x multiplication inside the mixer LO chain).
 
-The picture below shows an 18GHz wide spectrum plot for a wanted signal at 26GHz, on an Rhode&Schwarz FSW43 spectrum analyzer. Because this radio has intentionnaly been designed to allow for a wide range of both IF and RF frequencies, the IF filter has limited selectivity, and the user needs to use an external RF pass-band filter to select the wanted sideband. 
+The picture below, taken on a Rhode&Schwarz FSW43 spectrum analyzer, shows an 18GHz wide spectrum plot for a wanted signal at 26GHz, on an Rhode&Schwarz FSW43 spectrum analyzer. Because this radio has intentionnaly been designed to allow for a wide range of both IF and RF frequencies, the IF filter has limited selectivity, and the user needs to use an external RF pass-band filter to select the wanted sideband. 
 
 
 .. image:: images_tx_setup/26G_TX_widespan.png
@@ -87,14 +113,23 @@ The user also has control of the LO drive level or output power, as a way to opt
 Modulated signal generation 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Signal Source section of the GUI, highlighted in yellow in the following picture, has a drop-down menu where you can select any .mat file to play thru the ZCU208, or choose one of the available Matlab Apps to define and configure any QAM or OFDM waveforms [select ‘Wireless Waveform’]. 
+The **Signal Source** section of the GUI, highlighted in red in the following picture, has a drop-down menu where you can select to play other types of waveforms besides CW tones. You may upload any of your own .mat file to play thru the ZCU208, or run the **Matlab Wireless Waveform** App to define and configure any QAM or OFDM waveforms [select ‘Wireless Waveform’]. 
 
-** Add picture of the drop-down waveforms options**
+When selecting **MATLAB File**, the tool can process .mat files that contain any modulated waveform saved as a complex double vector. It may or may not be normalized, and the signal will be automatically scaled and quantized to 16 bits by the tool. Use the entry field on the right to set its absolute level relative to full scale (in dBFS).
 
+.. image:: images_tx_setup/DAC_waveform_selection.png
+
+.. note::  **When loading and playing your own .mat complex signal vectors:**  The Xilinx RF Evaluation Tool programmable logic is designed to process 16-sample vectors between the PS and the PL. Therefore it is recommended to size the Matlab formated signals as multiple of 16 samples. This avoids automatic zero-padding by the RFSOC Explorer tool, which may show up as transition spurs in the frequency domain with short waveforms.
+
+.. note:: To also avoid automatic resampling of the .mat waveform, set the DAC rate and interpolation rate according to the waveform sampling rate, BEFORE loading the signal. For instance, if the waveform samping rate is 614.4MHz and the target DAC rate is 6.144GHz, make sure you set the interpolation rate at 10x before loading the waveform. 
+
+
+Power-Down procedure 
+^^^^^^^^^^^^^^^^^^^^
 
 To **power down** the setup, follow these steps in this order:
 
-#. Reduce the level of the signal played on the DAC page down to -100dBFS, then download
+#. Reduce the level of the signal played on the DAC page down to -100dBFS, then hit **Download**
 #. Go back to the DTRX page in the RFSOC Explorer GUI and hit **Power Down**
 #. Turn OFF the DTRX2 card 12V power supply
 #. Turn off the ZCU208 power switch
