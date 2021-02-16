@@ -46,7 +46,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'mmw-docs'
-copyright = '2020, Avnet'
+copyright = '2021, Avnet'
 author = 'Avnet'
 
 # The version info for the project you're documenting, acts as replacement for
