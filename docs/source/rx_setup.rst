@@ -124,7 +124,7 @@ You’ll need to hit the **“Update PLL”** button every time you change the R
 The **"Signal Bandwidth"** entry field is an estimate of the received signal bandwidth and doesn't need to be accurate.  It is mostly used to make sure the edges of the signal still fall within the availble IF pass-band, at a particular IF center frequency. 
 
 Here's an example:
-    - The DTRX2 IF frequency range of the DTRX2 is typically 3.2-4.4GHz
+    - The DTRX2 IF frequency range of the receive paths is typically 3.2-4.4GHz
     - If the Signal BW = 50MHz, then the user may set the IF frequency anywhere between 3.225GHz and 4.375GHz
     - If the Signal BW = 400MHz, then the range of possible IF center frequencies is more restricted, within 3.4-4.2GHz 
 
