@@ -30,7 +30,7 @@ Each of these signal chains also have provisions for various RF access points (s
 Power-up steps via the RFSOC Explorer tool
 ------------------------------------------
 
-Before powering up the radio, set the spectrum analyzer center frequency to 25GHz to observe the signal transmitted. You may have to adjust the attenuation level on the analyzer.
+Before powering up the radio, set the spectrum analyzer center frequency to 25GHz to observe the signal transmitted. 
 
 From the RFSOC Explorer application, go to the “Otava DTRX” tab and hit the **“TX Power up”** button (as highlighted in red box below). This powers-up both TX channels and performs a default configuration of the 2 RF transmit channels. The following picture shows the TX channels power-up states.
 
@@ -40,9 +40,9 @@ The average current drawn on the 12V supply should then be about 760mA.
 
 By defaults, both TX channels should be ON, and in the following state:
 
--	The default RF frequency is 25GHz and the TX PLL is programmed to an LO at 14.6GHz, for a default IF frequency of 4.2GHz.
--	The TX PLL visual lock indicator D2, on the radio card, should be lit (green LED)
 -	Both TX channel 1 and channel 2 are enabled and powered up
+-	The default RF frequency is 25GHz and the TX PLL is programmed to an LO at 14.6GHz, for a default IF frequency of 4.2GHz.
+-	The TX PLL visual lock indicator (LED D2), on the radio card, should be lit in green, indicating lock. The PLL lock status is also reported in the TX PLL control section of the GUI.
 -	Both Ch1 and Ch2 RF attenuators are set to **MAX attenuation** at -15.5dB
 
 ZCU208 RFSOC DAC configuration and signal generation
@@ -58,9 +58,12 @@ How to configure and program the RFSOC DACs
 
 .. image:: images_tx_setup/RFSOCX_RFSOC_DACs_cntrl_page.jpg
 
-**Tile 0 DAC 2 drives the TX channel 1 of the DTRX2 card.**
+::
 
-**Tile 0 DAC 0 drives the TX channel 2 of the DTRX2 card.**
+    Tile 0 DAC 2 drives the TX channel 1 of the DTRX2 card.
+    Tile 0 DAC 0 drives the TX channel 2 of the DTRX2 card.
+
+The other DAC channels are not active, as they're not connected.
 
 Let’s start with the DAC2 and configure it as shown in this table:
 
@@ -101,14 +104,31 @@ At any time here, from the **OTAVA DRTX** GUI tab, you may adjust the RF attenua
 Note that the RFSOC Explorer GUI software automatically calculates the PLL output frequency based on the wanted RF frequency and IF frequency. 
 You’ll need to hit the **“Update PLL”** button every time you change the RF, or the IF, or the target Bandwidth frequencies, to program the PLL accordingly.
 
-On the DTRX2 card, the PLL circuit is configured to only run up to its maximum VCO fundamental frequency of <15.3GHz. Therefore, the mixer will operate in high-side injection until that threshold is reached and then switched to low-side injection. 
+On the DTRX2 card, the PLL circuit is configured to only run up to its maximum VCO fundamental frequency of <15.2GHz. Therefore, the mixer will operate in high-side injection until that threshold is reached and then switched to low-side injection. 
 For an IF of 4.2GHz, this means:
 
--	High side injection up to an RF of 2*PLL_freq – IF = 2*15.3 – 4.2 =  26.4GHz
+-	High side injection up to an RF of 2*PLL_freq – IF = 2*15.19 – 4.2 <  26.2GHz
 
--	Low side injection beyond 26.4GHz
+-	Low side injection beyond 26.2GHz
 
-The user also has control of the LO drive level or output power, as a way to optimize for LO leakage and mixing spurs, especially at low RF frequencies.
+This threshold will therefore move as you operate at different IF frequencies.
+
+The user also has control of the LO drive level to the mixers. There are called VCO A Power or VCO B Power, with selectable code values between 0 and 50. 
+This may be used to optimize for LO leakage and mixing spurs, especially at low RF frequencies.
+You may also power down the VCO output buffer driving each individual channels, using the VCO A or VCO B radio buttons.
+
+The **"Signal Bandwidth"** entry field is an estimate of the transmitted signal bandwidth and doesn't need to be accurate.  It is mostly used to make sure the edges of the signal still fall within the availble IF pass-band, at a particular IF center frequency. 
+
+Here's an example:
+    - The DTRX2 IF frequency range of the transmit paths is typically 3.5-5GHz
+    - If the Signal BW = 50MHz, then the user may set the IF frequency anywhere between 3.525GHz and 4.975GHz
+    - If the Signal BW = 400MHz, then the range of possible IF center frequencies is more restricted, within 3.7-4.8GHz 
+
+For a transmitted CW tone, you may leave this "Signal Bandwidth" parameter to the default value of 50MHz or set it as low as 1MHz. 
+
+Finally, to enable or disable individual signal chains: use the ON/OFF buttons on the left of each illustrated signal chains. One button controls the RF amplifier and the other one control both IF amplifiers.
+
+
 
 Modulated signal generation 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -130,15 +150,17 @@ Power-Down procedure
 To **power down** the setup, follow these steps in this order:
 
 #. Reduce the level of the signal played on the DAC page down to -100dBFS, then hit **Download**
-#. Go back to the DTRX page in the RFSOC Explorer GUI and hit **Power Down**
+#. Go back to the DTRX page in the RFSOC Explorer GUI and hit **TX Power Down**
 #. Turn OFF the DTRX2 card 12V power supply
 #. Turn off the ZCU208 power switch
 
-TX Channels gain budget vs. RF frequency
+TX Channels wideband frequency response
 ----------------------------------------
 
 The TX channels are very wideband, covering almost 10GHz of spectrum. Not all the devices used in the RF chain perform equally over this entire bandwidth. As a result, the end-to-end gain of the TX chain varies as a function of the output mmW frequency. 
-Also, as stated earlier, the PLL is only programmed to operate up to a maximum of 15.3GHz, which is the maximum VCO fundamental frequency. Beyond that point, the mixer LO injection needs to be switched to low-side injection, which occurs at and RF frequency >26.5GHz. 
+Also, as stated earlier, the PLL is only programmed to operate in VCO fundamental mode, up to a maximum of 15.2GHz. 
+Beyond that point, the mixer LO injection needs to be switched to low-side injection, which occurs around 26GHz depending on the IF operating frequency. 
+
 The graph below shows the maximum gain expected vs. RF frequency:
 
 .. image:: images_tx_setup/TX_RF_response.png
