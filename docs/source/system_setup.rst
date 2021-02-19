@@ -27,8 +27,9 @@ In addition to the mmWave kit, you will need the following.
 * Laptop or PC running Windows 10 OS
 * Bench power supply for 12V, 2A min 
 * 40GHz Spectrum analyzer for Transmitter tests
-* 1x 40GHz Signal generator for Receiver tests
-* 4x RF coaxial cables (2.92mm to 2.92 or 2.4mm on test equipment)
+* 40GHz Signal generator for Receiver tests
+* 1x or more RF coaxial cables (2.92mm to 2.92 or 2.4mm on test equipment)
+* 3x 2.92mm male 50-ohm terminations (rated for 40GHz, 0.5W or higher)
 * 1x RF SMA coax cable to connect the CLK104 Reference Clock (in the kit)
 * 1x 10dB SMA coaxial attenuator (for DTRX2 Ref clock input port)
 * Optional – n258, n257, n260 band-pass filters
@@ -83,7 +84,7 @@ The Xilinx ZCU208 Evaluation Kit has many jumpers and switches that are shipped 
    * TX outputs @ J3 (Ch1) and J6 (Ch2)
    * RX inputs @ J10 (Ch1) and J15 (Ch2)
 
-.. warning:: All unused channels on DTRX2 must be connected to 50 ohm terminations.
+.. warning:: All unused RF channels input/output connectors on the DTRX2 radio card must be terminated with 50 ohms 2.92mm terminations.
 
 7. Set ZCU208 to boot from the SD card by setting (SW6) switches as shown below
 
@@ -101,7 +102,7 @@ The ZCU208 requires custom software to control DTRX2 card via RFSoC Explorer.
 
 #. Safely eject the SD card from the PC and replace into ZCU208
 
-Boot & Network Configruation
+Boot & Network Configuration
 ----------------------------
 The default way to connect to the board is by setting a static IP address on your host PC. We also include instructions for connecting the board to a networked router and allowing the board to use DHCP to obtain an IP address.
 
@@ -122,11 +123,9 @@ Use this method when connecting the ZCU208 directly to your PC.
 
 DHCP IP
 ^^^^^^^
-Use this method when connecting the ZCU208 to your PC using a network. You will need a USB cabled connected to the board and your PC.
+Use this method when connecting the ZCU208 to your PC using a network (via Ethernet switch for instance). You will need a USB cable connected to the mini-USB port on the ZCU208 board and your PC.
 
-#. Ensure no power is applied to DTRX2
-#. Turn the ZCU208 power switch ON (near the 12V connector) 
-#. Remove the SD card from the ZCU208, insert into your PC
+#. First, remove the SD card from the ZCU208 and insert into your PC
 #. Open the ``autostart.sh`` file and comment the static IP assignment -- Do not comment ``rftool``
 
 ::
@@ -140,14 +139,13 @@ Use this method when connecting the ZCU208 to your PC using a network. You will 
     #fi
 
 5. Safely eject the SD card from the PC and replace into ZCU208
-6. Ensure no power is applied to DTRX2
+6. Open a serial terminal emulator on your PC and select the COM port assigned to the board. You may need to experiment with the list of connected COM ports to find which one is assigned to the ZCU208
 7. Turn the ZCU208 power switch ON (near the 12V connector)
-8. Open a serial terminal emulator on your PC and select the COM port assigned to the board. You may need to experiment with the list of connected COM ports to find which one is assigned to the ZCU208
    
 .. note:: For help installing the ZCU208 USB-UART driver and setting up a serial terminal emulator, consult `ZCU208 Software Install and Board Setup <https://www.xilinx.com/support/documentation/boards_and_kits/zcu208/2020_1/xtp607-zcu208-setup-c-2020-1.pdf>`_
 
-9. Login into the ZCU208 as ``login: root  Password: root``
-#. Discover the board IP address using the command ``ifconfig``. Take note of this IP address. You will use it in the next section to connect RFSoC Explorer.
+8. Login into the ZCU208 as ``login: root  Password: root``
+9. Discover the board IP address using the command ``ifconfig``. Take note of this IP address. You will use it in the next section to connect RFSoC Explorer.
 
 .. image:: images_system_setup/ifconfig.jpg
 
@@ -161,7 +159,7 @@ Start RFSoC Explorer
 
 .. image:: images_system_setup/rfsocX_main_tab.jpg
 
-#. On the Main tab, enter the IP address of the ZCU208 -- default addess: **169.254.10.2**
+#. On the Main tab, under "System", enter the IP address of the ZCU208 -- default addess: **169.254.10.2**
 
 .. image:: images_system_setup/rfsocX_ipaddress.jpg
     :scale: 75%
@@ -171,7 +169,10 @@ Start RFSoC Explorer
 
 Configure System Reference Clocks
 ----------------------------------
-The CLK104 module provides an ultra low-noise, wideband RF clock source for the ZCU208 RF-ADCs and RF-DACs. We use RFSoC Explorer to configure CLK104 to ouptut a coherent reference for the DTRX2 LO PLLs. For more information refer to `Xilinx UG1437 - CLK104 RF Clock Add-onCard <https://www.xilinx.com/support/documentation/boards_and_kits/zcu216/ug1437-clk104.pdf>`_
+The CLK104 module provides an ultra low-noise, wideband RF clock source for the ZCU208 RF-ADCs and RF-DACs. We use the RFSoC Explorer to configure CLK104 to ouptut a coherent 122.88MHz reference for the DTRX2 LO PLLs. For more information refer to `Xilinx UG1437 - CLK104 RF Clock Add-onCard <https://www.xilinx.com/support/documentation/boards_and_kits/zcu216/ug1437-clk104.pdf>`_
+
+The following picture shows the details of the CLK104 module. The bottom SMA is the 122.88MHz reference clock output to be connected to the DTRX2 input reference clock port. And the other SMA connector above, labelled "INPUT_REF_CLK" is a provision for an external 10MHz master reference clock signal (used for synchronization with test equipments for instance).  
+When an external 10MHz is not provided, the CLK104 module needs to be configured to use the internal 10MHz TCXO, as decribed in the steps below.
 
 .. figure:: images_system_setup/CLK104.png
     :align: center
@@ -184,14 +185,14 @@ The CLK104 module provides an ultra low-noise, wideband RF clock source for the 
 .. image:: images_system_setup/clk104_config.jpg
     :scale: 75%
 
-.. note:: The **122.88MHz REFCLKOUT_10MHz TCXO REF** configuration uses the CLK104 on-board 10MHz TCXO reference for the LMK04828B. If you wish to synchronize the setup up to a test instrument 10MHz clock, use the **122.88MHz REFCLKOUT_10MHz EXT REF** configuration (typically useful for EVM measurements). 
+.. note:: The **122.88MHz REFCLKOUT_10MHz TCXO REF** configuration uses the CLK104 on-board 10MHz TCXO reference for the LMK04828B. If you wish to synchronize the setup up to a test instrument 10MHz clock, use the **122.88MHz REFCLKOUT_10MHz EXT REF** configuration (typically recommended for demodulation and for EVM measurements). 
 
 Power Up DTRX2
 ---------------
 #. Connect your test equipment to the DTRX2 RF and TX ports
 #. Terminate unused channels with a 2.92mm 50 ohms termination
-#. Apply 12V DC power to the DTRX2 card
+#. Apply 12V DC power to the DTRX2 card, using the DC barrel jack-to-banana plugs cable provided.
 
 Both D4 and D6 "Power Good" red LEDs should be lit. The idle current drawn from the 12V supply should be about 45mA.
 
-Click NEXT to setup the DTRX2 transmit chain.
+Click NEXT to setup the DTRX2 transmit chains.
