@@ -1,14 +1,14 @@
 Transmitter Configuration and Operation
 =======================================
 
-In this procedure, we will go over the steps to power up and program the ZCU208+DTRX2 radio kit in **transmit mode**. The DTRX2 card transmitters will be run in their default states, operating at a default RF modulation frequency of 25GHz.
+In this procedure, we will go over the steps to program and configure the ZCU208+DTRX2 radio kit in **transmit mode**. The DTRX2 card transmitters will be run in their default states, operating at a default RF modulation frequency of 25GHz.
 
 The DTRX2 radio card transmit signal chains
 ----------------------------------
 
 The following diagram shows details of the TX signal chains of the DTRX2 card. 
 
-.. image:: images_tx_setup/TX_signal_chains.png
+.. image:: images_tx_setup/TX_Signal_chains _rev1.png
 
 
 The DTRX2 radio card implements 2 identical super-heterodyne TX chains, with their own dedicated PLL. 
@@ -162,7 +162,7 @@ To **power down** the setup, follow these steps in this order:
 #. Turn OFF the DTRX2 card 12V power supply
 #. Turn off the ZCU208 power switch
 
-TX Channels wideband frequency response
+TX channels wideband frequency response
 ----------------------------------------
 
 The TX channels are very wideband, covering almost 10GHz of spectrum. Not all the devices used in the RF chain perform equally over this entire bandwidth. As a result, the end-to-end gain of the TX chain varies as a function of the output mmW frequency. 
