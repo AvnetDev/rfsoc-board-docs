@@ -31,7 +31,7 @@ In addition to the mmWave kit, you will need the following.
 * 1x or more RF coaxial cables (2.92mm to 2.92 or 2.4mm on test equipment)
 * 3x 2.92mm male 50-ohm terminations (rated for 40GHz, 0.5W or higher)
 * 1x RF SMA coax cable to connect the CLK104 Reference Clock (in the kit)
-* 1x 10dB SMA coaxial attenuator (for DTRX2 Ref clock input port)
+* 1x 10dB SMA coaxial attenuator or low-pass filter (for DTRX2 Ref clock input port)
 * Optional – n258, n257, n260 band-pass filters
 * 12V jack to banana plug DC electrical wires (in the kit)
 
@@ -75,9 +75,9 @@ The Xilinx ZCU208 Evaluation Kit has many jumpers and switches that are shipped 
 #. Connect the Otava DTRX2 mmWave Card to the ZCU208 with the included screws
 #. Connect the ZCU208 to your PC with Ethernet and USB cables. *USB is optional for terminal access to Linux running on the board.*
 #. **DO NOT CONNECT POWER TO THE DTRX2 CARD** (this will be done later)
-#. Use a Carlisle SMA cable from the ZCU208 kit to connect **CLK104** OUTPUT_REF (J10) to **DTRX2** REF CLK IN (J21). 
+#. Use one of the provided SMA cables from the ZCU208 kit to connect **CLK104** OUTPUT_REF (J10) to **DTRX2** REF CLK IN (J21). 
 
-.. note:: For reference clock spurious mitigation, we recommend a 10dB coaxial attenuator between the CLK104 output and the REF_CLK_IN input on the DTRX2 card
+.. note:: For reference clock spurious mitigation, we recommend a 10dB coaxial attenuator, or a low-pass filter (with >122.88MHz cutoff) between the CLK104 output and the REF_CLK_IN input on the DTRX2 card
 
 6. Connect DTRX2 RF inputs/outputs to test equipment using 2.92mm mmW coaxial cables
 
@@ -159,7 +159,7 @@ Start RFSoC Explorer
 
 .. image:: images_system_setup/rfsocX_main_tab.jpg
 
-#. On the Main tab, under "System", enter the IP address of the ZCU208 -- default addess: **169.254.10.2**
+#. On the Main tab, under "System", enter the IP address of the ZCU208 -- default addess: **169.254.10.2**. Upon hitting the Enter key, a "GOOD" status should be reported next to it, confirming a successful communication link.
 
 .. image:: images_system_setup/rfsocX_ipaddress.jpg
     :scale: 75%
@@ -185,7 +185,7 @@ When an external 10MHz is not provided, the CLK104 module needs to be configured
 .. image:: images_system_setup/clk104_config.jpg
     :scale: 75%
 
-.. note:: The **122.88MHz REFCLKOUT_10MHz TCXO REF** configuration uses the CLK104 on-board 10MHz TCXO reference for the LMK04828B. If you wish to synchronize the setup up to a test instrument 10MHz clock, use the **122.88MHz REFCLKOUT_10MHz EXT REF** configuration (typically recommended for demodulation and for EVM measurements). 
+.. note:: The **122.88MHz REFCLKOUT_10MHz TCXO REF** configuration uses the CLK104 on-board 10MHz TCXO reference for the clock distribution chip on the CLK104 module. If you wish to synchronize the setup up to a test instrument 10MHz clock, use the **122.88MHz REFCLKOUT_10MHz EXT REF** configuration (typically recommended for demodulation and for EVM measurements). On the other end, for best EVM performance, and because of the limited amplitude level out of J10 on the CLK104 module, consider a clean external source to generate the 122.88MHz clock reference to the DTRX2.  
 
 Power Up DTRX2
 ---------------
