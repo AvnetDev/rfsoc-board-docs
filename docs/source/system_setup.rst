@@ -121,22 +121,25 @@ Use this method when connecting the ZCU208 directly to your PC.
 .. image:: images_system_setup/network-cfg.png
 .. image:: images_system_setup/laptop-ip.jpg
 
-DHCP IP
-^^^^^^^
-Use this method when connecting the ZCU208 to your PC using a network (via Ethernet switch for instance). You will need a USB cable connected to the mini-USB port on the ZCU208 board and your PC.
-
-#. First, remove the SD card from the ZCU208 and insert into your PC
-#. Open the ``autostart.sh`` file and comment the static IP assignment -- Do not comment ``rftool``
+The static IP address of the board can be changed by modifying the **autostart.sh** file on the SD card. Simply change the ``IPADDR`` field as needed and reboot. 
 
 ::
 
-    #!/bin/sh
-    #ifconfig -a | grep eth0
-    #RESULT=$?
-    #if [ $RESULT -eq 0 ]; then
-    #	ifconfig eth0 169.254.10.2
-    	rftool
-    #fi
+    # Static IP address (you can set to this to whatever works for you)
+    IPADDR="169.254.10.2"
+
+DHCP IP
+^^^^^^^
+Use this method when connecting the ZCU208 to your PC using a network (via Ethernet router for instance). You will need a USB cable connected to the mini-USB port on the ZCU208 board and your PC.
+
+#. First, remove the SD card from the ZCU208 and insert into your PC
+#. Open the **autostart.sh** file and set ``USE_DHCP=true``
+
+::
+
+    # Set true if your network assigns an IP address via DHCP
+    # Set false for static IP address
+    USE_DHCP=true
 
 5. Safely eject the SD card from the PC and replace into ZCU208
 6. Open a serial terminal emulator on your PC and select the COM port assigned to the board. You may need to experiment with the list of connected COM ports to find which one is assigned to the ZCU208
@@ -145,7 +148,8 @@ Use this method when connecting the ZCU208 to your PC using a network (via Ether
 .. note:: For help installing the ZCU208 USB-UART driver and setting up a serial terminal emulator, consult `ZCU208 Software Install and Board Setup <https://www.xilinx.com/support/documentation/boards_and_kits/zcu208/2020_1/xtp607-zcu208-setup-c-2020-1.pdf>`_
 
 8. Login into the ZCU208 as ``login: root  Password: root``
-9. Discover the board IP address using the command ``ifconfig``. Take note of this IP address. You will use it in the next section to connect RFSoC Explorer.
+9. Discover the board IP address using the command ``ifconfig``. 
+   **Take note of this IP address** You will use it in the next section to connect RFSoC Explorer.
 
 .. image:: images_system_setup/ifconfig.jpg
 
