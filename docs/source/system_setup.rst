@@ -1,6 +1,7 @@
-Introduction
--------------
-This document will show you how to get started with the `Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 <https://www.avnet.com/rfsoc-mmw>`_. Follow the step-by-step instructions to configure the kit, setup your computer, and use Avnet RFSoC Explorer® in MATLAB to generate and acquire signals through the Otava DTRX2 Dual Transceiver mmWave Radio Card.
+System Setup
+============
+
+This document will show you how to get started with the `Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 <https://www.avnet.com/rfsoc-mmw>`_. Follow the step-by-step instructions to assemble the kit, setup your computer, and use Avnet RFSoC Explorer® in MATLAB to configure the Otava DTRX2 Dual Transceiver mmWave Radio Card, generate and acquire signals.
 
 .. image:: images_system_setup/zcu208_dtrx2_kit.png
 
@@ -8,7 +9,16 @@ Kit Overview
 ------------
 The Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 is ideal for prototyping RF applications in mmW bands including 5G NR FR2, wireless backhaul, as well as K/Ka band radar and SATCOM. This platform combines the Otava DTRX2 Dual Transceiver mmWave Radio Card — jointly developed by Otava and Avnet — with the Xilinx Zynq ® UltraScale+ ™ RFSoC ZCU208 Evaluation Kit.
 
-.. warning:: This kit can radiate radio frequency energy and has not been tested for CE, FCC, or IC compliance. The intended use is for demonstration, engineering development, or evaluation purposes. See :ref:`compliance`
+.. warning:: This kit can radiate radio frequency energy and has not been tested for CE, FCC, or IC compliance. The intended use is for demonstration, engineering development, or evaluation purposes. See :doc:`Regulatory Compliance Information <./compliance>`
+
+Kit Includes
+^^^^^^^^^^^^
+* Xilinx Zynq UltraScale+ RFSoC ZCU208 Evaluation Kit (full OEM kit)
+* Otava DTRX2 mmWave Radio Daughtercard
+* DC barrel jack to banana plug cable for DTRX2
+* Avnet RFSoC Explorer for MATLAB and Simulink
+
+.. image:: images_system_setup/mmw_full_kit_PB.jpg
 
 Required Equipment
 ------------------
@@ -18,6 +28,12 @@ In addition to the mmWave kit, you will need the following.
 * Bench power supply for 12V, 2A min 
 * 40GHz Spectrum analyzer for Transmitter tests
 * 40GHz Signal generator for Receiver tests
+* 1x or more RF coaxial cables (2.92mm to 2.92 or 2.4mm on test equipment)
+* 3x 2.92mm male 50-ohm terminations (rated for 40GHz, 0.5W or higher)
+* 1x RF SMA coax cable to connect the CLK104 Reference Clock (in the kit)
+* 1x 10dB SMA coaxial attenuator or low-pass filter (for DTRX2 Ref clock input port)
+* Optional – n258, n257, n260 band-pass filters
+* 12V jack to banana plug DC electrical wires (in the kit)
 
 
 Install RFSoC Explorer
@@ -49,60 +65,89 @@ RFSoC Explorer installs easily using the MATLAB Add-Ons store.
 
 Hardware Setup
 ----------------
-The Xilinx ZCU208 Evaluation Kit has many jumpers and switches that are shipped with default states, which do not need to change for this tutorial. In the following steps we describe the minimal configuration. For a comprehensive setup guide, refer to the online `Xilinx ZCU208 Quick Start Wiki <https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/569017820/RF+DC+Evaluation+Tool+for+ZCU208+board+-+Quick+Start>`_
+The Xilinx ZCU208 Evaluation Kit has many jumpers and switches that are shipped with default states, which do not need to change for this tutorial. In the following steps we describe the minimal configuration. For a comprehensive setup guide, refer to the `ZCU208 Software Install and Board Setup <https://www.xilinx.com/support/documentation/boards_and_kits/zcu208/2020_1/xtp607-zcu208-setup-c-2020-1.pdf>`_
 
 .. image:: images_system_setup/hw-setup.jpg
 
+**Refer to the diagram above when making the following connections.**
 
 #. Connect the Xilinx CLK104 module to the ZCU208 with the included screws
 #. Connect the Otava DTRX2 mmWave Card to the ZCU208 with the included screws
-#. Connect the ZCU208 to your host PC with Ethernet and USB cables as shown in the picture
+#. Connect the ZCU208 to your PC with Ethernet and USB cables. *USB is optional for terminal access to Linux running on the board.*
 #. **DO NOT CONNECT POWER TO THE DTRX2 CARD** (this will be done later)
-#. Use a Carlisle SMA cable from the ZCU208 kit to connect **CLK104** OUTPUT_REF (J10) to **DTRX2** REF CLK IN (J21). 
+#. Use one of the provided SMA cables from the ZCU208 kit to connect **CLK104** OUTPUT_REF (J10) to **DTRX2** REF CLK IN (J21). 
 
-.. note:: For reference clock spurious mitigation, we recommend a 10dB coaxial attenuator between the CLK104 output and the REF_CLK_IN input on the DTRX2 card
+.. note:: For reference clock spurious mitigation, we recommend a 10dB coaxial attenuator, or a low-pass filter (with >122.88MHz cutoff) between the CLK104 output and the REF_CLK_IN input on the DTRX2 card
 
 6. Connect DTRX2 RF inputs/outputs to test equipment using 2.92mm mmW coaxial cables
 
-   * TX output @ J3 (Ch1) and J6 (Ch2)
-   * RX input @ J10 (Ch1) and J15 (Ch2)
+   * TX outputs @ J3 (Ch1) and J6 (Ch2)
+   * RX inputs @ J10 (Ch1) and J15 (Ch2)
 
-.. warning:: All unused channels on DTRX2 must be connected to 50 ohm terminations.
+.. warning:: All unused RF channels input/output connectors on the DTRX2 radio card must be terminated with 50 ohms 2.92mm terminations.
 
 7. Set ZCU208 to boot from the SD card by setting (SW6) switches as shown below
 
 .. image:: images_system_setup/zcu208-dip-sw.png
 
-SD Card
--------
+Prepare SD Card
+---------------
 The ZCU208 requires custom software to control DTRX2 card via RFSoC Explorer.
 
 #. Remove the SD card from the ZCU208, insert into your PC, and format as FAT using a tool like `SD Memory Card Formatter <https://www.sdcard.org/downloads/formatter_4/>`_
 
 #. Download the file **avnet_rfsocX_zcu208_boot_v1_0.zip** @ *>>> TBC SURL <<<*
 
-#. Unzip the archive and copy the files to the root level of the SD card. 
+#. Unzip the archive and copy the files to the root level of the SD card
 
-#. Safely eject the SD card from the PC and replace into ZCU208.
+#. Safely eject the SD card from the PC and replace into ZCU208
 
-.. image:: images_system_setup/Hardware_connections.png
+Boot & Network Configuration
+----------------------------
+The default way to connect to the board is by setting a static IP address on your host PC. We also include instructions for connecting the board to a networked router and allowing the board to use DHCP to obtain an IP address.
 
+Static IP (default)
+^^^^^^^^^^^^^^^^^^^
+Use this method when connecting the ZCU208 directly to your PC.
 
-Boot ZCU208
-------------
 #. Ensure no power is applied to DTRX2
 
 #. Turn the ZCU208 power switch ON (near the 12V connector) 
 
-#. The application auto-start function creates an IP connection for the board at address **169.254.10.2**. 
+#. The application auto-start function creates an IP connection for the board at address **169.254.10.2**
 
-#. Set a static IP for your host PC's Local Ethernet adapter.  Make sure your PC and the board are on the same subnet and gateway. See example below.
+#. Set a static IP for your host PC's Local Ethernet adapter.  Make sure your PC and the board are on the same subnet and gateway. See example below
 
 .. image:: images_system_setup/network-cfg.png
 .. image:: images_system_setup/laptop-ip.jpg
 
+DHCP IP
+^^^^^^^
+Use this method when connecting the ZCU208 to your PC using a network (via Ethernet switch for instance). You will need a USB cable connected to the mini-USB port on the ZCU208 board and your PC.
 
-.. note:: The auto-start IP address can be changed in the autostart.sh file on your SD card. 
+#. First, remove the SD card from the ZCU208 and insert into your PC
+#. Open the ``autostart.sh`` file and comment the static IP assignment -- Do not comment ``rftool``
+
+::
+
+    #!/bin/sh
+    #ifconfig -a | grep eth0
+    #RESULT=$?
+    #if [ $RESULT -eq 0 ]; then
+    #	ifconfig eth0 169.254.10.2
+    	rftool
+    #fi
+
+5. Safely eject the SD card from the PC and replace into ZCU208
+6. Open a serial terminal emulator on your PC and select the COM port assigned to the board. You may need to experiment with the list of connected COM ports to find which one is assigned to the ZCU208
+7. Turn the ZCU208 power switch ON (near the 12V connector)
+   
+.. note:: For help installing the ZCU208 USB-UART driver and setting up a serial terminal emulator, consult `ZCU208 Software Install and Board Setup <https://www.xilinx.com/support/documentation/boards_and_kits/zcu208/2020_1/xtp607-zcu208-setup-c-2020-1.pdf>`_
+
+8. Login into the ZCU208 as ``login: root  Password: root``
+9. Discover the board IP address using the command ``ifconfig``. Take note of this IP address. You will use it in the next section to connect RFSoC Explorer.
+
+.. image:: images_system_setup/ifconfig.jpg
 
 
 Start RFSoC Explorer
@@ -114,7 +159,7 @@ Start RFSoC Explorer
 
 .. image:: images_system_setup/rfsocX_main_tab.jpg
 
-#. On the Main tab, enter the IP address of the ZCU208 -- default addess: **169.254.10.2**
+#. On the Main tab, under "System", enter the IP address of the ZCU208 -- default addess: **169.254.10.2**. Upon hitting the Enter key, a "GOOD" status should be reported next to it, confirming a successful communication link.
 
 .. image:: images_system_setup/rfsocX_ipaddress.jpg
     :scale: 75%
@@ -124,9 +169,15 @@ Start RFSoC Explorer
 
 Configure System Reference Clocks
 ----------------------------------
-The CLK104 module provides an ultra low-noise, wideband RF clock source for the ZCU208 RF-ADCs and RF-DACs. We use RFSoC Explorer to configure CLK104 to ouptut a coherent reference for the DTRX2 LO PLLs.
+The CLK104 module provides an ultra low-noise, wideband RF clock source for the ZCU208 RF-ADCs and RF-DACs. We use the RFSoC Explorer to configure CLK104 to ouptut a coherent 122.88MHz reference for the DTRX2 LO PLLs. For more information refer to `Xilinx UG1437 - CLK104 RF Clock Add-onCard <https://www.xilinx.com/support/documentation/boards_and_kits/zcu216/ug1437-clk104.pdf>`_
 
-.. image:: images_system_setup/CLK104.png
+The following picture shows the details of the CLK104 module. The bottom SMA is the 122.88MHz reference clock output to be connected to the DTRX2 input reference clock port. And the other SMA connector above, labelled "INPUT_REF_CLK" is a provision for an external 10MHz master reference clock signal (used for synchronization with test equipments for instance).  
+When an external 10MHz is not provided, the CLK104 module needs to be configured to use the internal 10MHz TCXO, as decribed in the steps below.
+
+.. figure:: images_system_setup/CLK104.png
+    :align: center
+
+    Xilinx CLK104 System Clock Module
 
 #. Go to the RFSoC Explorer Main tab
 #. Select **CLK104 Configuration > 122.88MHz REFCLKOUT_10MHz TCXO REF**
@@ -134,12 +185,14 @@ The CLK104 module provides an ultra low-noise, wideband RF clock source for the 
 .. image:: images_system_setup/clk104_config.jpg
     :scale: 75%
 
-.. note:: The **122.88MHz REFCLKOUT_10MHz TCXO REF** configuration uses the CLK104 on-board 10MHz TCXO reference for the LMK04828B. If you wish to synchronize the setup up to a test instrument 10MHz clock, use the **122.88MHz REFCLKOUT_10MHz EXT REF** configuration (typically useful for EVM measurements). 
+.. note:: The **122.88MHz REFCLKOUT_10MHz TCXO REF** configuration uses the CLK104 on-board 10MHz TCXO reference for the clock distribution chip on the CLK104 module. If you wish to synchronize the setup up to a test instrument 10MHz clock, use the **122.88MHz REFCLKOUT_10MHz EXT REF** configuration (typically recommended for demodulation and for EVM measurements). On the other end, for best EVM performance, and because of the limited amplitude level out of J10 on the CLK104 module, consider a clean external source to generate the 122.88MHz clock reference to the DTRX2.  
 
 Power Up DTRX2
 ---------------
 #. Connect your test equipment to the DTRX2 RF and TX ports
 #. Terminate unused channels with a 2.92mm 50 ohms termination
-#. Apply 12V DC power to the DTRX2 card
+#. Apply 12V DC power to the DTRX2 card, using the DC barrel jack-to-banana plugs cable provided.
 
 Both D4 and D6 "Power Good" red LEDs should be lit. The idle current drawn from the 12V supply should be about 45mA.
+
+Click NEXT to setup the DTRX2 transmit chains.
