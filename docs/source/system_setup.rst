@@ -48,8 +48,15 @@ Your computer will need the following MathWorks software.
 * DSP System Toolbox
 * Fixed-Point Designer
 * Communications Toolbox
-* Communications Toolbox Support Package for Xilinx Zynq-Based Radio
 * Signal Processing Toolbox
+* Install one of the following support packages from the MATLAB Add-On Manager
+  
+    * Communications Toolbox Support Package for Xilinx Zynq-Based Radio
+    * HDL Coder Support Package for Xilinx RFSoC Devices
+    * SoC Blockset Support Package for Xilinx Devices
+
+Optional toolboxes for working with standards-compliant waveforms in RFSoC Explorer
+
 * LTE Toolbox (optional)
 * 5G Toolbox (optional)
 
@@ -96,7 +103,10 @@ The ZCU208 requires custom software to control DTRX2 card via RFSoC Explorer.
 
 1. Remove the SD card from the ZCU208, insert into your PC, and format as FAT using a tool like `SD Memory Card Formatter <https://www.sdcard.org/downloads/formatter_4/>`_
 
-2. Use this link to download the SD boot image archive: `avnet_rfsocX_zcu208_boot_v1_0.zip <https://avnet.me/rfsocX_zcu208_boot_v1_0>`_
+2. Use one of the links below to download the SD boot image archive, depending on the version of zcu208 you are using.
+   
+    * ZCU208 ES1 SD Card Image - `avnet_rfsocX_zcu208es1_boot_v1_0.zip <https://avnet.me/rfsocX_zcu208es1_boot_v1_0>`_
+    * ZCU208 Production SD Card Image - `avnet_rfsocX_zcu208_boot_v1_0.zip <https://avnet.me/rfsocX_zcu208_boot_v1_0>`_
 
 .. image:: images_system_setup/sd_download.jpg
 
