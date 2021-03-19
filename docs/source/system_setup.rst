@@ -94,13 +94,17 @@ Prepare SD Card
 ---------------
 The ZCU208 requires custom software to control DTRX2 card via RFSoC Explorer.
 
-#. Remove the SD card from the ZCU208, insert into your PC, and format as FAT using a tool like `SD Memory Card Formatter <https://www.sdcard.org/downloads/formatter_4/>`_
+1. Remove the SD card from the ZCU208, insert into your PC, and format as FAT using a tool like `SD Memory Card Formatter <https://www.sdcard.org/downloads/formatter_4/>`_
 
-#. Download the file **avnet_rfsocX_zcu208_boot_v1_0.zip** @ *>>> TBC SURL <<<*
+2. Use this link to download the SD boot image archive: `avnet_rfsocX_zcu208_boot_v1_0.zip <https://avnet.me/rfsocX_zcu208_boot_v1_0>`_
 
-#. Unzip the archive and copy the files to the root level of the SD card
+.. image:: images_system_setup/sd_download.jpg
 
-#. Safely eject the SD card from the PC and replace into ZCU208
+3. Unzip the archive to the root level of the SD card
+
+.. image:: images_system_setup/sd_root.jpg
+
+4. Safely eject the SD card from the PC and replace in the ZCU208
 
 Boot & Network Configuration
 ----------------------------
@@ -197,6 +201,10 @@ Power Up DTRX2
 #. Terminate unused channels with a 2.92mm 50 ohms termination
 #. Apply 12V DC power to the DTRX2 card, using the DC barrel jack-to-banana plugs cable provided.
 
-Both D4 and D6 "Power Good" red LEDs should be lit. The idle current drawn from the 12V supply should be about 45mA.
+Both D4 and D6 "Power Good" red LEDs should be ON. The idle current drawn from the 12V supply should be about 45mA.
+
+In the next sections you will power up the TX and RX signal chains using RFSoC Explorer and observe the green RX PLL LOCK and TX PLL LOCK LEDs turn ON, as shown in this image.
+
+.. image:: images_system_setup/dtrx2_leds.jpg
 
 Click NEXT to setup the DTRX2 transmit chains.
