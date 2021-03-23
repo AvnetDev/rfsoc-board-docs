@@ -202,7 +202,7 @@ When an external 10MHz is not provided, the CLK104 module needs to be configured
 .. image:: images_system_setup/clk104_config.jpg
     :scale: 75%
 
-.. note:: The **122.88MHz REFCLKOUT_10MHz TCXO REF** configuration uses the CLK104 on-board 10MHz TCXO reference for the clock distribution chip on the CLK104 module. If you wish to synchronize the setup up to a test instrument 10MHz clock, use the **122.88MHz REFCLKOUT_10MHz EXT REF** configuration (typically recommended for demodulation and for EVM measurements). On the other end, for best EVM performance, and because of the limited amplitude level out of J10 on the CLK104 module, consider a clean external source to generate the 122.88MHz clock reference to the DTRX2.  
+.. note:: The **122.88MHz REFCLKOUT_10MHz TCXO REF** configuration points to the register configuration file for the LMK04828 clock distribution chip on the CLK104 module. This particular file sets the LMK04828 to take the on-board 10MHz TCXO for reference clock signal. If you wish to synchronize the setup up to a test instrument 10MHz output reference, connect this port to the CLK104 SMA labelled "INPUT_REF_CLK" and use the **122.88MHz REFCLKOUT_10MHz EXT REF** configuration (typically recommended for demodulation and for EVM measurements). On the other end, for best EVM performance, and because of the limited amplitude level out of J10 on the CLK104 module, consider a clean external source to generate the 122.88MHz clock reference to the DTRX2. Finally, the tool also allows for a custom configuration file to be loaded as well (saved as a .txt file and to be located in the same directory as the RFSOC Explorer app). 
 
 Power Up DTRX2
 ---------------
