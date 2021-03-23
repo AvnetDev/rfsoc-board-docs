@@ -120,52 +120,51 @@ Boot & Network Configuration
 ----------------------------
 The default way to connect to the board is by setting a static IP address on your host PC. We also include instructions for connecting the board to a networked router and allowing the board to use DHCP to obtain an IP address.
 
-Static IP (default)
-^^^^^^^^^^^^^^^^^^^
+DHCP IP (default)
+^^^^^^^^^^^^^^^^^^
+Use this method when connecting the ZCU208 to your PC using a network (via Ethernet router for instance). You will need a USB cable connected to the mini-USB port on the ZCU208 board and your PC.
+
+1. Open a serial terminal emulator (e.g. TeraTerm) on your PC.
+
+.. note:: For help installing the ZCU208 USB-UART driver and setting up a serial terminal emulator, consult `ZCU208 Software Install and Board Setup <https://www.xilinx.com/support/documentation/boards_and_kits/zcu208/2020_1/xtp607-zcu208-setup-c-2020-1.pdf>`_
+
+2. Turn the ZCU208 power switch ON (near the 12V connector)
+#. Login into the ZCU208 as ``login: root  Password: root``
+#. Discover the board IP address using the command ``ifconfig``. 
+   **Take note of this IP address** You will use it in the next section to connect RFSoC Explorer.
+
+.. image:: images_system_setup/ifconfig.jpg
+
+
+Static IP
+^^^^^^^^^^
 Use this method when connecting the ZCU208 directly to your PC.
 
-#. Ensure no power is applied to DTRX2
+1. Ensure that the ZCU208 power switch is OFF (near the 12V connector)
+#. Remove the SD card from the ZCU208 and insert into your PC
+#. Open the **autostart.sh** file in a test editor. Set ``USE_DHCP=false``
 
-#. Turn the ZCU208 power switch ON (near the 12V connector) 
+::
 
-#. The application auto-start function creates an IP connection for the board at address **169.254.10.2**
+    # Set true if your network assigns an IP address via DHCP
+    # Set false for static IP address
+    USE_DHCP=false
 
-#. Set a static IP for your host PC's Local Ethernet adapter.  Make sure your PC and the board are on the same subnet and gateway. See example below
+4. Safely eject the SD card from the PC and replace into ZCU208
 
-.. image:: images_system_setup/network-cfg.png
-.. image:: images_system_setup/laptop-ip.jpg
+#. Turn the ZCU208 power switch ON
 
-The static IP address of the board can be changed by modifying the **autostart.sh** file on the SD card. Simply change the ``IPADDR`` field as needed and reboot. 
+#. The application auto-start function creates an IP connection for the board at address **169.254.10.2** To use a different IP address, simply modify the ``IPADDR`` field in the autostart.sh file.
 
 ::
 
     # Static IP address (you can set to this to whatever works for you)
     IPADDR="169.254.10.2"
 
-DHCP IP
-^^^^^^^
-Use this method when connecting the ZCU208 to your PC using a network (via Ethernet router for instance). You will need a USB cable connected to the mini-USB port on the ZCU208 board and your PC.
+7. Set a static IP for your host PC's Local Ethernet adapter.  Make sure your PC and the board are on the same subnet and gateway. See example below
 
-#. First, remove the SD card from the ZCU208 and insert into your PC
-#. Open the **autostart.sh** file and set ``USE_DHCP=true``
-
-::
-
-    # Set true if your network assigns an IP address via DHCP
-    # Set false for static IP address
-    USE_DHCP=true
-
-5. Safely eject the SD card from the PC and replace into ZCU208
-6. Open a serial terminal emulator on your PC and select the COM port assigned to the board. You may need to experiment with the list of connected COM ports to find which one is assigned to the ZCU208
-7. Turn the ZCU208 power switch ON (near the 12V connector)
-   
-.. note:: For help installing the ZCU208 USB-UART driver and setting up a serial terminal emulator, consult `ZCU208 Software Install and Board Setup <https://www.xilinx.com/support/documentation/boards_and_kits/zcu208/2020_1/xtp607-zcu208-setup-c-2020-1.pdf>`_
-
-8. Login into the ZCU208 as ``login: root  Password: root``
-9. Discover the board IP address using the command ``ifconfig``. 
-   **Take note of this IP address** You will use it in the next section to connect RFSoC Explorer.
-
-.. image:: images_system_setup/ifconfig.jpg
+.. image:: images_system_setup/network-cfg.png
+.. image:: images_system_setup/laptop-ip.jpg
 
 
 Start RFSoC Explorer
@@ -173,11 +172,11 @@ Start RFSoC Explorer
 
 #. Open MATLAB and start RFSoC Explorer by entering the following command: 
 
-   ``rfx = Avnet_RFSoC_Explorer(‘target board’, 4);``
+   ``rfx = Avnet_RFSoC_Explorer(‘target_board’, 4);``
 
 .. image:: images_system_setup/rfsocX_main_tab.jpg
 
-#. On the Main tab, under "System", enter the IP address of the ZCU208 -- default addess: **169.254.10.2**. Upon hitting the Enter key, a "GOOD" status should be reported next to it, confirming a successful communication link.
+2. On the Main tab, under "System", enter the IP address of the ZCU208 -- default addess: **169.254.10.2**. Upon hitting the Enter key, a "GOOD" status should be reported next to it, confirming a successful communication link.
 
 .. image:: images_system_setup/rfsocX_ipaddress.jpg
     :scale: 75%
