@@ -65,9 +65,12 @@ ZCU208 RFSOC ADC configuration and signal capture
 
 Let’s start with the ADC 23 and configure it as shown in this table:
 
-.. image:: images_rx_setup/ADC_config_table1.png
+.. image:: images_rx_setup/ADC_config_table2.png
 
-Make sure the ADC sampling rate or Tile Clock rate is set to 4951.2MHz. 
+::
+
+    Make sure the ADC sampling rate or Tile Clock rate is set to 4915.2MHz. 
+
 
 Then enter the IF or "NCO" RF frequency in MHz, and finally the decimation rate, as highlighted in the ADC23 white entry fields in the picture below:
 
@@ -83,22 +86,24 @@ The user has the ability to also select between the BRAM and the DDR4 memory for
 
 - For longer data captures, up to 32M complex samples, select DDR4 and reconfigure the ADC
 
+For the initial bring-up, it is recommended to start in **BRAM** mode. Just toggle that switch before initiating the ADC configuration.
+
 Then hit the **“Configure”** button, which runs the ADC configuration and calibration. 
 
 The ADCs have to be calibrated with **NO active** RF signal at the receiver input (Make sure the signal generator RF output is still OFF when you hit the "Configure" button)
 
 .. warning:: Do not inject an RF signal >-25dBm peak at the RX input ports, when both the RF and IF attenuators have been set to **minimum attenuation**!
  
-Once the ADC has been calibrated, go back to the DTRX board control page and set the CH1 RF and IF attenuators to -6dB each.
+Once the ADC has been calibrated (The "Configure" button will turn back green), go back to the DTRX board control page and set the CH1 RF and IF attenuators to -6dB each.
 
-You may now turn ON the signal generator to perform signal captures. 
+You may now turn ON the signal generator to perform signal captures. You may set its output level to -20dBm here since the receive chain has been set to Max gain -12dB total.
 
 Back to the ADCs control tab (called "Tile3 ADCs"), hit either "single capture" or "multiple captures", as shown below.
 
 .. image:: images_rx_setup/RX_capture_modes.png
     :scale: 40%
 
-The data is stored in a local variable **“rx_sample_buffer”** as complex data and available from the Matlab workspace to be saved or post-processed. 
+The time domain data is stored in a local variable **“rx_sample_buffer”** as complex data and available from the Matlab workspace to be saved or post-processed. 
 
 ::
 
@@ -109,10 +114,6 @@ The signal captured is also shown on the graph, on the bottom right of the GUI w
 .. image:: images_rx_setup/ADC23_CW_capture.png
 
 You may also use the **"Spectrum Analyzer" ON-OFF** button, in the Signal Plot section above the graph, to start the Matlab Spectrum analyzer display mode. This is convenient for adding markers, doing integrated power measurements etc...
-
-::
-
-    ***Example to be added here*** 
 
 At any time here, you may adjust the target RF frequency, the IF frequency, the target instantaneous bandwidth or the RF attenuator setting, as shown in the picture below. Also remember that after the RX chains have been powered up, all the RF/IF attenuators are set to max attenuation levels. 
 
