@@ -146,7 +146,7 @@ When selecting **MATLAB File**, the tool can process .mat files that contain any
 Here's below an example of ACLR measurement using a 50MHz 5GNR TM1.1 file, already oversampled at 768MHz (to match the target DAC rate of 6.144Gsps with 8x interpolation), and with about 13dB PAR.
 In this particular case, we set the signal peak amplitude at -2dBFS, and set the RF attenuator on the DTRX2 card at -7dB attenuation.
 
-.. image:: images_tx_setup/ACLR_25GHz_50MHz_FOFDM.png
+.. image:: images_tx_setup/ACLR_50MHz_TM1p1_25GHz_revB.png
     :scale: 50%
 
 
