@@ -143,8 +143,8 @@ When selecting **MATLAB File**, the tool can process .mat files that contain any
 
 .. note:: To also avoid automatic resampling of the .mat waveform, set the DAC rate and interpolation rate according to the waveform sampling rate, BEFORE loading the signal. For instance, if the waveform samping rate is 614.4MHz and the target DAC rate is 6.144GHz, make sure you set the interpolation rate at 10x before loading the waveform. 
 
-Here's below an example of ACLR measurement using a 100MHz FR2 5GNR Matlab file, already oversampled at 768MHz (to match the target DAC rate of 6.144Gsps with 8x interpolation), and with about 12dB PAR.
-In this particular case, we set the signal peak amplitude at -2dBFS, and set the RF attenuator on the DTRX2 card at -6dB attenuation.
+Here's below an example of ACLR measurement using a 50MHz 5GNR TM1.1 file, already oversampled at 768MHz (to match the target DAC rate of 6.144Gsps with 8x interpolation), and with about 13dB PAR.
+In this particular case, we set the signal peak amplitude at -2dBFS, and set the RF attenuator on the DTRX2 card at -7dB attenuation.
 
 .. image:: images_tx_setup/ACLR_25GHz_50MHz_FOFDM.png
     :scale: 50%
