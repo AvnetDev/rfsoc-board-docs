@@ -92,10 +92,11 @@ This user interface also models the expected signal post DUC or post interpolati
 
 With the DAC output IF frequency set at 4.2GHz, and the TX LO PLL running at 14.6GHz, the mixer generates 2 sidebands, including the wanted signal at 25GHz. Some amount of LO leakage also leaks out at 2x LO or 29.2GHz (2x multiplication inside the mixer LO chain).
 
-The picture below, taken on a Rhode&Schwarz FSW43 spectrum analyzer, shows an 18GHz wide spectrum plot for a wanted signal at 26GHz, on an Rhode&Schwarz FSW43 spectrum analyzer. Because this radio has intentionnaly been designed to allow for a wide range of both IF and RF frequencies, the IF filter has limited selectivity, and the user needs to use an external RF pass-band filter to select the wanted sideband. 
+The picture below shows an 20GHz wide spectrum plot for a wanted signal at 25GHz, on an Rhode&Schwarz FSW43 spectrum analyzer. Because this radio has intentionnaly been designed to allow for a wide range of both IF and RF frequencies, the IF filter has limited selectivity, and the user would also want to use an external RF pass-band filter to select the wanted sideband, before connecting to any front-end active component. 
 
 
-.. image:: images_tx_setup/26G_TX_widespan.png
+.. image:: images_tx_setup/Wideband_20GHzspan_25GHzout_4p3GHzIF_m10dBatten_revB.png
+    :scale: 50%
 
 At any time here, from the **OTAVA DRTX** GUI tab, you may adjust the RF attenuation level, the target RF frequency, the IF frequency and target instantaneous bandwidth, as shown in the picture below. Remember that the TX paths attenuators are set to MAX attenuation after power up.
 
