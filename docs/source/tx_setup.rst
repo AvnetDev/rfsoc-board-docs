@@ -92,10 +92,11 @@ This user interface also models the expected signal post DUC or post interpolati
 
 With the DAC output IF frequency set at 4.2GHz, and the TX LO PLL running at 14.6GHz, the mixer generates 2 sidebands, including the wanted signal at 25GHz. Some amount of LO leakage also leaks out at 2x LO or 29.2GHz (2x multiplication inside the mixer LO chain).
 
-The picture below, taken on a Rhode&Schwarz FSW43 spectrum analyzer, shows an 18GHz wide spectrum plot for a wanted signal at 26GHz, on an Rhode&Schwarz FSW43 spectrum analyzer. Because this radio has intentionnaly been designed to allow for a wide range of both IF and RF frequencies, the IF filter has limited selectivity, and the user needs to use an external RF pass-band filter to select the wanted sideband. 
+The picture below shows an 20GHz wide spectrum plot for a wanted signal at 25GHz, on an Rhode&Schwarz FSW43 spectrum analyzer. Because this radio has intentionnaly been designed to allow for a wide range of both IF and RF frequencies, the IF filter has limited selectivity, and the user would also want to use an external RF pass-band filter to select the wanted sideband, before connecting to any front-end active component. 
 
 
-.. image:: images_tx_setup/26G_TX_widespan.png
+.. image:: images_tx_setup/Wideband_20GHzspan_25GHzout_4p3GHzIF_m10dBatten_revB.png
+    :scale: 50%
 
 At any time here, from the **OTAVA DRTX** GUI tab, you may adjust the RF attenuation level, the target RF frequency, the IF frequency and target instantaneous bandwidth, as shown in the picture below. Remember that the TX paths attenuators are set to MAX attenuation after power up.
 
@@ -143,10 +144,10 @@ When selecting **MATLAB File**, the tool can process .mat files that contain any
 
 .. note:: To also avoid automatic resampling of the .mat waveform, set the DAC rate and interpolation rate according to the waveform sampling rate, BEFORE loading the signal. For instance, if the waveform samping rate is 614.4MHz and the target DAC rate is 6.144GHz, make sure you set the interpolation rate at 10x before loading the waveform. 
 
-Here's below an example of ACLR measurement using a 100MHz FR2 5GNR Matlab file, already oversampled at 768MHz (to match the target DAC rate of 6.144Gsps with 8x interpolation), and with about 12dB PAR.
-In this particular case, we set the signal peak amplitude at -2dBFS, and set the RF attenuator on the DTRX2 card at -6dB attenuation.
+Here's below an example of ACLR measurement using a 50MHz 5GNR TM1.1 file, already oversampled at 768MHz (to match the target DAC rate of 6.144Gsps with 8x interpolation), and with about 13dB PAR.
+In this particular case, we set the signal peak amplitude at -2dBFS, and set the RF attenuator on the DTRX2 card at -7dB attenuation.
 
-.. image:: images_tx_setup/ACLR_25GHz_50MHz_FOFDM.png
+.. image:: images_tx_setup/ACLR_50MHz_TM1p1_25GHz_revB.png
     :scale: 50%
 
 
