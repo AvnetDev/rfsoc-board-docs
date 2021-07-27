@@ -170,13 +170,16 @@ Use this method when connecting the ZCU208 directly to your PC.
 Start RFSoC Explorer
 --------------------
 
-#. Open MATLAB and start RFSoC Explorer by entering the following command: 
+1. Open MATLAB, go to the APPS tab, and click the icon.
 
-   ``rfx = Avnet_RFSoC_Explorer(‘target_board’, 4);``
+.. image:: images_system_setup/rfsocX_app_start.png
+
+.. note:: Beginning in RFSoC Explorer v2.0, the app can also be started with the following API command: 
+   ``Avnet_RFSoC_Explorer('startup');``
 
 .. image:: images_system_setup/rfsocX_main_tab.jpg
 
-2. On the Main tab, under "System", enter the IP address of the ZCU208 -- default addess: **169.254.10.2**. Upon hitting the Enter key, a "GOOD" status should be reported next to it, confirming a successful communication link.
+1. On the Main tab, under "System", enter the IP address of the ZCU208. The default addess is: **169.254.10.2**.
 
 .. image:: images_system_setup/rfsocX_ipaddress.jpg
     :scale: 75%
