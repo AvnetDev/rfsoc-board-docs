@@ -7,5 +7,8 @@ Wideband mmWave Radio Dev Kit for RFSoC Gen-3
    :maxdepth: 2
 
    system_setup
-   rx_setup
    tx_setup
+   rx_setup
+   api_help
+   compliance
+   
