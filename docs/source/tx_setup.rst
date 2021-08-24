@@ -1,14 +1,6 @@
 Transmitter Configuration and Operation
 =======================================
 
-<<<<<<< HEAD
-Section 1
-^^^^^^^^^
-
-.. image:: images_tx_setup/26GHz_ACLR_50MHz_FOFDM.png
-
-
-=======
 In this procedure, we will go over the steps to program and configure the ZCU208+DTRX2 radio kit in **transmit mode**. The DTRX2 card transmitters will be run in their default states, operating at a default RF modulation frequency of 25GHz.
 
 The DTRX2 radio card transmit signal chains
@@ -185,4 +177,3 @@ The graph below shows the maximum gain expected vs. RF frequency:
 Besides the available “VOP” gain control range available at DAC level (only available Q1 2021), the user has the ability to control the RF gain thru the on-board mmw digital step attenuator, by 0.5dB steps. The graph below shows the step response vs. set attenuation value.
 
 .. image:: images_tx_setup/RF_DSA_response.png
->>>>>>> d415e65403478933a50365e778bf20e2ada7f373
