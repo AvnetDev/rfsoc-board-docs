@@ -172,7 +172,7 @@ Beyond that point, the mixer LO injection needs to be switched to low-side injec
 
 The graph below shows the maximum gain expected vs. RF frequency:
 
-.. image:: images_tx_setup/TX_RF_response.png
+.. image:: images_tx_setup/TX_RF_response_revB.png
 
 Besides the available “VOP” gain control range available at DAC level (only available Q1 2021), the user has the ability to control the RF gain thru the on-board mmw digital step attenuator, by 0.5dB steps. The graph below shows the step response vs. set attenuation value.
 
