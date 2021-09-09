@@ -67,12 +67,12 @@ The other DAC channels are not active, as they're not connected.
 
 Let’s start with the DAC2 and configure it as shown in this table:
 
-.. image:: images_tx_setup/DACs_config_table_2.png
+.. image:: images_tx_setup/DACs_config_table_3.png
     :scale: 50%
 
 #. Check that the Tile clock (DAC sampling rate) is set to 6144MHz 
 #. Click on the ON radio button on the right of DAC2
-#. Enter the IF frequency of operation in the "Analog Fc (MHz)" field: here 4200MHz, which will also be used to set the RFSOC DUC NCO frequency based on the sampling rate  
+#. Enter the IF frequency of operation in the "Analog Fc (MHz)" field: here 4300MHz, which will also be used to set the RFSOC DUC NCO frequency based on the sampling rate  
 #. Enter the interpolation rate: 8x
 
 
@@ -105,12 +105,12 @@ At any time here, from the **OTAVA DRTX** GUI tab, you may adjust the RF attenua
 Note that the RFSOC Explorer GUI software automatically calculates the PLL output frequency based on the wanted RF frequency and IF frequency. 
 You’ll need to hit the **“Update PLL”** button every time you change the RF, or the IF, or the target Bandwidth frequencies, to program the PLL accordingly.
 
-On the DTRX2 card, the PLL circuit is configured to only run up to its maximum VCO fundamental frequency of <15.2GHz. Therefore, the mixer will operate in high-side injection until that threshold is reached and then switched to low-side injection. 
-For an IF of 4.2GHz, this means:
+On the DTRX2 card, the PLL circuit is configured to only run up to its maximum VCO fundamental frequency of 15.2GHz. Therefore, the mixer will operate in high-side injection until that threshold is reached and then switched to low-side injection. 
+For an IF of 4.3GHz, this means:
 
--	High side injection up to an RF of 2*PLL_freq – IF = 2*15.19 – 4.2 <  26.2GHz
+-	High side injection up to an RF of 2*PLL_freq – IF = 2*15.2 – 4.3 <  26.1GHz
 
--	Low side injection beyond 26.2GHz
+-	Low side injection beyond 26.1GHz
 
 This threshold will therefore move as you operate at different IF frequencies.
 
@@ -121,9 +121,9 @@ You may also power down the VCO output buffer driving each individual channels, 
 The **"Signal Bandwidth"** entry field is an estimate of the transmitted signal bandwidth and doesn't need to be accurate.  It is mostly used to make sure the edges of the signal still fall within the availble IF pass-band, at a particular IF center frequency. 
 
 Here's an example:
-    - The DTRX2 IF frequency range of the transmit paths is typically 3.5-5GHz
-    - If the Signal BW = 50MHz, then the user may set the IF frequency anywhere between 3.525GHz and 4.975GHz
-    - If the Signal BW = 400MHz, then the range of possible IF center frequencies is more restricted, within 3.7-4.8GHz 
+    - The DTRX2 IF frequency range of the transmit paths is typically 3.8-5GHz
+    - If the Signal BW = 50MHz, then the user may set the IF frequency anywhere between 3.825GHz and 4.975GHz
+    - If the Signal BW = 400MHz, then the range of possible IF center frequencies is more restricted, within 4-4.8GHz 
 
 For a transmitted CW tone, you may leave this "Signal Bandwidth" parameter to the default value of 50MHz or set it as low as 1MHz. 
 
@@ -172,7 +172,7 @@ Beyond that point, the mixer LO injection needs to be switched to low-side injec
 
 The graph below shows the maximum gain expected vs. RF frequency:
 
-.. image:: images_tx_setup/TX_RF_response.png
+.. image:: images_tx_setup/TX_RF_Gain_vs_Freq_revB.png
 
 Besides the available “VOP” gain control range available at DAC level (only available Q1 2021), the user has the ability to control the RF gain thru the on-board mmw digital step attenuator, by 0.5dB steps. The graph below shows the step response vs. set attenuation value.
 
