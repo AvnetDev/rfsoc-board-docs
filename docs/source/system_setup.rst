@@ -179,13 +179,21 @@ Start RFSoC Explorer
 
 .. image:: images_system_setup/rfsocX_main_tab.jpg
 
-1. On the Main tab, under "System", enter the IP address of the ZCU208. The default addess is: **169.254.10.2**.
+1. On the Main tab, under "System", enter the IP address of the ZCU208. The default board addess is: **169.254.10.2**.
+
+.. note:: You may need to maximize the RFSoC Explorer window to reveal the IP Address dropdown
+
+If a successful TCP/IP connection is established with the board, the IP address turns from black to red, and the address is stored in the dropdown menu.
 
 .. image:: images_system_setup/rfsocX_ipaddress.jpg
     :scale: 75%
     :align: center
 
-.. note:: You may need to maximize the RFSoC Explorer window to reveal the IP Address dropdown
+If a TCP/IP connection cannot be established with the board, the app reports "DISCONNECTED" in red.
+
+.. image:: images_system_setup/rfsocX_ipaddress_disconnected.jpg
+    :scale: 75%
+    :align: center
 
 Configure System Reference Clocks
 ----------------------------------
