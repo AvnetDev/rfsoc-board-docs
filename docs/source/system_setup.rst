@@ -99,7 +99,7 @@ The Xilinx ZCU208 Evaluation Kit has many jumpers and switches that are shipped 
 
 Prepare SD Card
 ---------------
-The ZCU208 requires custom software to control DTRX2 card via RFSoC Explorer.
+Follow these steps to load a custom SD card boot image for the ZCU208, allowing it to control the Otava DTRX2 card via RFSoC Explorer.
 
 1. Remove the SD card from the ZCU208, insert into your PC, and format as FAT using a tool like `SD Memory Card Formatter <https://www.sdcard.org/downloads/formatter_4/>`_
 
@@ -115,6 +115,8 @@ The ZCU208 requires custom software to control DTRX2 card via RFSoC Explorer.
 .. image:: images_system_setup/sd_root.jpg
 
 4. Safely eject the SD card from the PC and replace in the ZCU208
+
+.. note:: **Design File Information** The software and firmware contained in the SD Card image are biult upon the `Xilinx RF Data Converter Evaluation Tool (v2020.2) <https://www.xilinx.com/products/silicon-devices/soc/rfsoc.html#resources>`_. Our customizations are accomplished via TCL scripts for the Xilinx Vivado project, and several modifications to the Xilinx PetaLinux BSP. The source code for these modifications is freely available. We are in the process of moving our private GitHub repo to public status so that the project can be cloned/forked/etc.
 
 Boot & Network Configuration
 ----------------------------
