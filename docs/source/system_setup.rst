@@ -5,6 +5,7 @@ This document will show you how to get started with the `Avnet Wideband mmWave R
 
 .. image:: images_system_setup/zcu208_dtrx2_kit.png
 
+|
 Kit Overview
 ------------
 The Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 is ideal for prototyping RF applications in mmW bands including 5G NR FR2, wireless backhaul, as well as K/Ka band radar and SATCOM. This platform combines the Otava DTRX2 Dual Transceiver mmWave Radio Card — jointly developed by Otava and Avnet — with the Xilinx Zynq ® UltraScale+ ™ RFSoC ZCU208 Evaluation Kit.
@@ -20,6 +21,7 @@ Kit Includes
 
 .. image:: images_system_setup/mmw_full_kit_PB.jpg
 
+|
 Required Equipment
 ------------------
 In addition to the mmWave kit, you will need the following.
@@ -35,7 +37,7 @@ In addition to the mmWave kit, you will need the following.
 * Optional – n258, n257, n260 band-pass filters
 * 12V jack to banana plug DC electrical wires (in the kit)
 
-
+|
 Install RFSoC Explorer
 ----------------------
 Avnet RFSoC Explorer provides native connection to MATLAB ® and Simulink ®, featuring graphical control of the platform and intuitive APIs for programmatic access.
@@ -70,6 +72,7 @@ RFSoC Explorer installs easily using the MATLAB Add-Ons store.
 
 .. image:: images_system_setup/mw-addon.png
 
+|
 Hardware Setup
 ----------------
 The Xilinx ZCU208 Evaluation Kit has many jumpers and switches that are shipped with default states, which do not need to change for this tutorial. In the following steps we describe the minimal configuration. For a comprehensive setup guide, refer to the `ZCU208 Software Install and Board Setup <https://www.xilinx.com/support/documentation/boards_and_kits/zcu208/2020_1/xtp607-zcu208-setup-c-2020-1.pdf>`_
@@ -96,7 +99,9 @@ The Xilinx ZCU208 Evaluation Kit has many jumpers and switches that are shipped 
 7. Set ZCU208 to boot from the SD card by setting (SW6) switches as shown below
 
 .. image:: images_system_setup/zcu208-dip-sw.png
+    :align: center 
 
+|
 Prepare SD Card
 ---------------
 Follow these steps to load a custom SD card boot image for the ZCU208, allowing it to control the Otava DTRX2 card via RFSoC Explorer.
@@ -118,6 +123,7 @@ Follow these steps to load a custom SD card boot image for the ZCU208, allowing 
 
 .. note:: **Design File Information** The software and firmware contained in the SD Card image are biult upon the `Xilinx RF Data Converter Evaluation Tool (v2020.2) <https://www.xilinx.com/products/silicon-devices/soc/rfsoc.html#resources>`_. Our customizations are accomplished via TCL scripts for the Xilinx Vivado project, and several modifications to the Xilinx PetaLinux BSP. The source code for these modifications is freely available. We are in the process of moving our private GitHub repo to public status so that the project can be cloned/forked/etc.
 
+|
 Boot & Network Configuration
 ----------------------------
 The default way to connect to the board is by setting a static IP address on your host PC. We also include instructions for connecting the board to a networked router and allowing the board to use DHCP to obtain an IP address.
@@ -136,7 +142,6 @@ Use this method when connecting the ZCU208 to your PC using a network (via Ether
    **Take note of this IP address** You will use it in the next section to connect RFSoC Explorer.
 
 .. image:: images_system_setup/ifconfig.jpg
-
 
 Static IP
 ^^^^^^^^^^
@@ -168,7 +173,7 @@ Use this method when connecting the ZCU208 directly to your PC.
 .. image:: images_system_setup/network-cfg.png
 .. image:: images_system_setup/laptop-ip.jpg
 
-
+|
 Start RFSoC Explorer
 --------------------
 
@@ -197,6 +202,7 @@ If a TCP/IP connection cannot be established with the board, the app reports "DI
     :scale: 75%
     :align: center
 
+|
 Configure System Reference Clocks
 ----------------------------------
 The CLK104 module provides an ultra low-noise, wideband RF clock source for the ZCU208 RF-ADCs and RF-DACs. We use the RFSoC Explorer to configure CLK104 to ouptut a coherent 122.88MHz reference for the DTRX2 LO PLLs. For more information refer to `Xilinx UG1437 - CLK104 RF Clock Add-onCard <https://www.xilinx.com/support/documentation/boards_and_kits/zcu216/ug1437-clk104.pdf>`_
@@ -216,6 +222,8 @@ When an external 10MHz is not provided, the CLK104 module needs to be configured
     :scale: 75%
 
 .. note:: The **122.88MHz REFCLKOUT_10MHz TCXO REF** configuration points to the register configuration file for the LMK04828 clock distribution chip on the CLK104 module. This particular file sets the LMK04828 to take the on-board 10MHz TCXO for reference clock signal. If you wish to synchronize the setup to a test instrument 10MHz output reference, connect this port from the back of the instrument to the CLK104 SMA labelled "INPUT_REF_CLK" (direct connection and no attenuator needed) and use the **122.88MHz REFCLKOUT_10MHz EXT REF** configuration (typically recommended for demodulation and for EVM measurements). On the other end, for best EVM performance, and because of the limited amplitude level out of J10 on the CLK104 module, consider driving the DTRX2 card reference clock port directly with a clean CW external source set at 122.88MHz and about +15dBm amplitude. Finally, the tool also allows for a custom LMK04828 configuration file to be loaded into the CLK104 module. The file must be created using the Texas Instruments TICSPRO utility, saved as TEXT format, filename **custom_TCS.txt**, and located in the same directory as the RFSOC Explorer app. 
+
+|
 Power Up DTRX2
 ---------------
 #. Connect your test equipment to the DTRX2 RF and TX ports
