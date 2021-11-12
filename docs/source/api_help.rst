@@ -56,23 +56,24 @@ Main API help
          'startup'
          'shutdown'
          'ipconfig'
-         'Memory_type'           % RFSoC Gen-2/ZCU111 memory type is global
+         'Memory_type'           % RFSoC Gen-1/ZCU111 memory type is global
          'DTRX2'                 % RFSoC Gen-3/ZCU208 with Otava DTRX2 mmW
-
+         'Program_CLK104_LMK'    % Program the CLK104 module's LMK PLL (ZCU208 only)
+  
      -- RF-ADC --
          'ADC_tile_enable'
          'ADC_tile_disable'
          'ADC_tile_open'         % Opens tile tab in the GUI
          'ADC_channel_enable'    % Performs tile enable if required
          'ADC_channel_disable'   % Resets channel parameters
-         'ADC_memory_type'       % RFSoC Gen-2/ZCU111 only
+         'ADC_memory_type'       % RFSoC Gen-1/ZCU111 only
          'ADC_sample_rate'       % Tile internal PLL in MHz
          'ADC_decimation'
          'ADC_mixer'
          'ADC_calibration_status'
          'ADC_program'           % Program target board with user settings
          'ADC_read'              % Transfer samples from ADC buffer to PC
-
+  
      -- RF-DAC --
          'DAC_tile_enable'
          'DAC_tile_disable'
@@ -87,18 +88,19 @@ Main API help
          'DAC_signal_source'     % Setup DAC signal type and parameter structure
          'DAC_program'           % Program target board with user settings
          'DAC_write'             % Transfer samples from PC to DAC buffer for replay
-
+         'DAC_signal_level'      % dBFS only
+  
      Examples
      To enable DAC tile 3 chan 0 :
          [status, data] = Avnet_RFSoC_Explorer('DAC_channel_enable', 3, 0);
-
+  
      To set ADC tile 0 sample rate to 4915.2 MHz :
          [status, data] = Avnet_RFSoC_Explorer('ADC_sample_rate', 0, 4915.2);
-
+  
      To program ADC tile 0 and read 8192 samples :
          [status, data] = Avnet_RFSoC_Explorer('ADC_program', 0);
          [status, data] = Avnet_RFSoC_Explorer('ADC_read', 0, 8192);
-
+  
      To program DAC tile 1 chan 2 mixer :
          % Create structure with mixer parameters
          mixerDAC.Freq        = +4700;      % MHz
@@ -108,14 +110,14 @@ Main API help
          % Set mixer parameters and program the board
          [status, data] = Avnet_RFSoC_Explorer('DAC_mixer', 1, 2, mixerDAC);
          [status, data] = Avnet_RFSoC_Explorer('DAC_program', 1);
-
+  
      To get get help :
          help Avnet_RFSoC_Explorer;    % List full API help
          Avnet_RFSoC_Explorer('help'); % List full API help
          Avnet_RFSoC_Explorer('help', 'ADC_read');  % Usage for specific function
          Avnet_RFSoC_Explorer('help', 'ADC');       % Usage for all ADC functions
-
-     More extensive examples are located in the /scripts folder. 
+  
+     More extensive examples are located in the /scripts folder.
 
 
 Otava DTRX2 mmWave API Help (ZCU208 only)
@@ -139,6 +141,7 @@ Otava DTRX2 mmWave API Help (ZCU208 only)
            TX_IF_AMP_Ch2_Enable    % turn on TX Channel 2
            TX_IF_AMP_Ch2_Disable   % turn off TX Channel 2
            TX_Update_GC_Button     % Update Gain Control (DSA) in TX chain; programmatic equivalent of user pressing GUI 'Update TX Gain Control' Button
+           TX_Update_PLL_Button
 
            RX_power_up             % RX power up: RF/IF DSAs are enabled; RX channels remain disabled until calls to RX_Ch1_RfAmp/2_Enable & RX_Ch1_IfAmp/2_Enable
            RX_power_down
@@ -152,6 +155,7 @@ Otava DTRX2 mmWave API Help (ZCU208 only)
            RX_Ch2_IfAmp_Disable
            RX_Update_GC_ch1_Button % Update Gain Control (DSA) in RX chain; programmatic equivalent of user pressing GUI 'Update RX Gain Control' Button
            RX_Update_GC_ch2_Button
+           RX_Update_PLL_Button
 
    Avnet_RFSoC_Explorer('DTRX2', <dtrx2_cmd>, <parameter>)
       ex. Avnet_RFSoC_Explorer('DTRX2', 'TX_RF_DSA_Attenuation', 10)  => set TX RF DSA Attenuation = 10 dB
