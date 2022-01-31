@@ -46,7 +46,7 @@ Avnet RFSoC Explorer provides native connection to MATLAB ® and Simulink ®, fe
 
 Your computer will need the following MathWorks software. 
 
-* MATLAB R2021a or later 
+* MATLAB (`supported versions <https://www.mathworks.com/matlabcentral/fileexchange/73665-avnet-rfsoc-explorer>`_)
 * DSP System Toolbox
 * Fixed-Point Designer
 * Communications Toolbox
@@ -55,6 +55,7 @@ Your computer will need the following MathWorks software.
   
     * Communications Toolbox Support Package for Xilinx Zynq-Based Radio
     * HDL Coder Support Package for Xilinx RFSoC Devices
+    * HDL Coder Support Package for Xilinx Zynq Platform
     * SoC Blockset Support Package for Xilinx Devices
 
 Optional toolboxes for working with standards-compliant waveforms in RFSoC Explorer
