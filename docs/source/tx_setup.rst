@@ -41,7 +41,7 @@ The average current drawn on the 12V supply should then be about 760mA.
 By defaults, both TX channels should be ON, and in the following state:
 
 -	Both TX channel 1 and channel 2 are enabled and powered up
--	The default RF frequency is 25GHz and the TX PLL is programmed to an LO at 14.6GHz, for a default IF frequency of 4.2GHz.
+-	The default RF frequency is 25GHz and the TX PLL is programmed to an LO at 14.65GHz, for a default IF frequency of 4.3GHz.
 -	The TX PLL visual lock indicator (LED D2), on the radio card, should be lit in green, indicating lock. The PLL lock status is also reported in the TX PLL control section of the GUI.
 -	Both Ch1 and Ch2 RF attenuators are set to **MAX attenuation** at -15.5dB
 
@@ -90,7 +90,7 @@ You should see a display of the I and Q waveform in the graph below, on the GUI 
 Note that you may also display the frequency domain response of the signal being loaded by toggling the **Time-Frequency** button above the graph.
 This user interface also models the expected signal post DUC or post interpolating FIR filter: toggle the **Baseband-DUC** output button
 
-With the DAC output IF frequency set at 4.2GHz, and the TX LO PLL running at 14.6GHz, the mixer generates 2 sidebands, including the wanted signal at 25GHz. Some amount of LO leakage also leaks out at 2x LO or 29.2GHz (2x multiplication inside the mixer LO chain).
+With the DAC output IF frequency set at 4.3GHz, and the TX LO PLL running at 14.65GHz, the mixer generates 2 sidebands, including the wanted signal at 25GHz. Some amount of LO leakage also leaks out at 2x LO or 29.3GHz (2x multiplication inside the mixer LO chain).
 
 The picture below shows an 20GHz wide spectrum plot for a wanted signal at 25GHz, on an Rhode&Schwarz FSW43 spectrum analyzer. Because this radio has intentionnaly been designed to allow for a wide range of both IF and RF frequencies, the IF filter has limited selectivity, and the user would also want to use an external RF pass-band filter to select the wanted sideband, before connecting to any front-end active component. 
 
