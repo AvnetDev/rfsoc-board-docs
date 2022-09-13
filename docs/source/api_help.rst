@@ -18,106 +18,112 @@ Use the API to search help:
 
 ::
 
-  >> Avnet_RFSoC_Explorer('help', 'ADC')
+   >> Avnet_RFSoC_Explorer('help', 'ADC')
+   API_functions related to 'ADC':
 
-  [status, data] = Avnet_RFSoC_Explorer('ADC_tile_enable', <tile>)
-  [status, data] = Avnet_RFSoC_Explorer('ADC_tile_disable', <tile>)
-  [status, data] = Avnet_RFSoC_Explorer('ADC_tile_open', <tile>)
-  [status, data] = Avnet_RFSoC_Explorer('ADC_channel_enable', <tile>, <chan>)
-  [status, data] = Avnet_RFSoC_Explorer('ADC_channel_disable', <tile>, <chan>)
-  [status, data] = Avnet_RFSoC_Explorer('ADC_memory_type' <tile>, <memtype>)
-  [status, data] = Avnet_RFSoC_Explorer('ADC_sample_rate' <tile>, <sample_rate_MHz>)
-  [status, data] = Avnet_RFSoC_Explorer('ADC_decimation' <tile>, <chan>, <rate_change>)
-  [status, data] = Avnet_RFSoC_Explorer('ADC_mixer', <tile>, <chan>, <mixer_struct>)
-  [status, data] = Avnet_RFSoC_Explorer('ADC_calibration_status', <tile>)
-  [status, data] = Avnet_RFSoC_Explorer('ADC_program', <tile>, <calibrate>)
-      Set optional input arg <calibrate> to logical true to force calibration.
-      Return arg status.ADCcalibrationModeChange is logical [true|false]
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_tile_enable', <tile>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_tile_disable', <tile>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_tile_open', <tile>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_calibration_status', <tile>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_program', <tile>, <calibrate>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_memory_type' <tile>, <memtype>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_sample_rate', <tile>, <sample_rate_MHz>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_channel_enable', <tile>, <chan>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_channel_disable', <tile>, <chan>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_read', <tile>, <chan>, <nSamples>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_setDSA', <tile>, <chan>, <dB-attenuation>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_decimation', <tile>, <chan>, <rate_change>)
+   [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_mixer', <tile>, <chan>, <params>)
 
-  [status, data] = Avnet_RFSoC_Explorer('ADC_read' <tile>, <chan>, <nSamples>)
 
 Main API help
 -------------
+
 ::
 
-  Avnet_RFSoC_Explorer application programmer interface (API)
-   [status, data] = Avnet_RFSoC_Explorer(API_function, varargin) executes the
-     command string defined by 'API_function' and returns pass/fail 'status'
-     and any relevant 'data'. Use varargin to provide relevant paramters.
+    Avnet_RFSoC_Explorer Application programmer interface (API) created by Avnet, Inc. 
+    to connect Xilinx Zynq® UltraScale+™ RFSoC gigasample data converters to MATLAB® 
+    and Simulink®.
+    
+    [STATUS, DATA, MSG] = Avnet_RFSoC_Explorer(API_FUNCTION, VARARGIN)
+    executes the command string defined by API_FUNCTION and returns a
+    STATUS boolean pass/fail (true/false) , any DATA values, and
+    error/warning MSG. Use VARARGIN to provide relevant additional
+    paramters.
 
-     For a full listing of API_function and usage :
+    For help with syntax and VARARGIN:
 
-         Avnet_RFSoC_Explorer('help')
+        Avnet_RFSoC_Explorer('help', API_FUNCTION);  % Search function string
+        Avnet_RFSoC_Explorer('help', <string>);      % Search partial string
 
-     Available API_function strings :
-  
-     -- Global --
-         'help'
-         'startup'
-         'shutdown'
-         'ipconfig'
-         'Memory_type'           % RFSoC Gen-1/ZCU111 memory type is global
-         'DTRX2'                 % RFSoC Gen-3/ZCU208 with Otava DTRX2 mmW
-         'Program_CLK104_LMK'    % Program the CLK104 module's LMK PLL (ZCU208 only)
-  
-     -- RF-ADC --
-         'ADC_tile_enable'
-         'ADC_tile_disable'
-         'ADC_tile_open'         % Opens tile tab in the GUI
-         'ADC_channel_enable'    % Performs tile enable if required
-         'ADC_channel_disable'   % Resets channel parameters
-         'ADC_memory_type'       % RFSoC Gen-1/ZCU111 only
-         'ADC_sample_rate'       % Tile internal PLL in MHz
-         'ADC_decimation'
-         'ADC_mixer'
-         'ADC_calibration_status'
-         'ADC_program'           % Program target board with user settings
-         'ADC_read'              % Transfer samples from ADC buffer to PC
-  
-     -- RF-DAC --
-         'DAC_tile_enable'
-         'DAC_tile_disable'
-         'DAC_tile_open'         % Opens tile tab in the GUI
-         'DAC_channel_enable'    % Performs tile enable if required
-         'DAC_channel_disable'
-         'DAC_memory_type'       % RFSoC Gen-3/ZCU208 only
-         'DAC_sample_rate'
-         'DAC_interpolation'
-         'DAC_mixer'
-         'DAC_DUC_mode'          % RFSoC Gen-3/ZCU208 only
-         'DAC_signal_source'     % Setup DAC signal type and parameter structure
-         'DAC_program'           % Program target board with user settings
-         'DAC_write'             % Transfer samples from PC to DAC buffer for replay
-         'DAC_signal_level'      % dBFS only
-  
-     Examples
-     To enable DAC tile 3 chan 0 :
-         [status, data] = Avnet_RFSoC_Explorer('DAC_channel_enable', 3, 0);
-  
-     To set ADC tile 0 sample rate to 4915.2 MHz :
-         [status, data] = Avnet_RFSoC_Explorer('ADC_sample_rate', 0, 4915.2);
-  
-     To program ADC tile 0 and read 8192 samples :
-         [status, data] = Avnet_RFSoC_Explorer('ADC_program', 0);
-         [status, data] = Avnet_RFSoC_Explorer('ADC_read', 0, 8192);
-  
-     To program DAC tile 1 chan 2 mixer :
-         % Create structure with mixer parameters
-         mixerDAC.Freq        = +4700;      % MHz
-         mixerDAC.PhaseOffset = 0;          % Degrees
-         mixerDAC.MixerMode   = 'IQ->Real'; % 'Real->Real'|'IQ->Real'
-         mixerDAC.MixerType   = 'Fine';     % 'Fine'|'Coarse'
-         % Set mixer parameters and program the board
-         [status, data] = Avnet_RFSoC_Explorer('DAC_mixer', 1, 2, mixerDAC);
-         [status, data] = Avnet_RFSoC_Explorer('DAC_program', 1);
-  
-     To get get help :
-         help Avnet_RFSoC_Explorer;    % List full API help
-         Avnet_RFSoC_Explorer('help'); % List full API help
-         Avnet_RFSoC_Explorer('help', 'ADC_read');  % Usage for specific function
-         Avnet_RFSoC_Explorer('help', 'ADC');       % Usage for all ADC functions
-  
-     More extensive examples are located in the /scripts folder.
+    API_FUNCTION strings for RFSoC:
+    
+    -- Global --
+        'help'                  % Also try ('help', <string>)
+        'startup'               % Use alone or with board_id
+        'shutdown'              % Close GUI and release the application
+        'ipconfig'              % Board IP address
+        'Memory_type'           % RFSoC Gen1/ZCU111 memory type is global
+        'DTRX2'                 % RFSoC Gen3/ZCU208 with Otava DTRX2 mmW card
+        'Program_CLK104_LMK'    % Program CLK104 module LMK PLL (ZCU208 only)
+
+    -- RF-ADC --
+        'ADC_tile_enable'       % RFSoC Explorer parameter != RFDC IP setting
+        'ADC_tile_disable'      % RFSoC Explorer parameter != RFDC IP setting
+        'ADC_tile_open'         % Opens tile tab in the GUI
+        'ADC_channel_enable'    % Performs tile enable if required
+        'ADC_channel_disable'   % Resets channel parameters
+        'ADC_memory_type'       % RFSoC Gen3/ZCU208 memory type is per tile
+        'ADC_setDSA'            % Digital Step Attenuator (Gen3)
+        'ADC_sample_rate'       % Tile internal PLL in MHz
+        'ADC_decimation'        % Available integer factors depend on RFSoC Gen
+        'ADC_mixer'             % Requires struct of mixer parameters
+        'ADC_calibration_status'% Calibration of interleaved ADC required?
+        'ADC_program'           % Program target board with user settings
+        'ADC_read'              % Transfer samples from ADC buffer to PC
+
+    -- RF-DAC --
+        'DAC_tile_enable'       % RFSoC Explorer parameter != RFDC IP setting
+        'DAC_tile_disable'      % RFSoC Explorer parameter != RFDC IP setting
+        'DAC_tile_open'         % Opens tile tab in the GUI
+        'DAC_channel_enable'    % Performs tile enable if required
+        'DAC_channel_disable'   % Resets channel parameters
+        'DAC_memory_type'       % RFSoC Gen3/ZCU208 memory type is per tile
+        'DAC_setVOP'            % Variable Output Power (Gen3)
+        'DAC_sample_rate'       % Tile internal PLL in MHz
+        'DAC_interpolation'     % Available integer factors depend on RFSoC Gen
+        'DAC_mixer'             % Requires struct of mixer parameters
+        'DAC_DUC_mode'          % Image Rejection Modes (RFSoC Gen3)
+        'DAC_VOP'               % Variable Output Power (RFSoC Gen3)
+        'DAC_signal_source'     % Setup DAC signal type and parameter structure
+        'DAC_program'           % Program target board with user settings
+        'DAC_write'             % Transfer waveform from PC to DAC buffer for replay
+        'DAC_signal_level'      % dBFS only
+
+    Examples:
+    
+    Enable DAC tile 3 chan 0:
+        [error_flag, data, msg] = Avnet_RFSoC_Explorer('DAC_channel_enable', 3, 0);
+
+    Set ADC tile 0 sample rate to 4915.2 MHz :
+        [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_sample_rate', 0, 4915.2);
+
+    Program ADC tile 0 and read 8192 samples :
+        [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_program', 0);
+        [error_flag, data, msg] = Avnet_RFSoC_Explorer('ADC_read', 0, 8192);
+
+    Program DAC tile 1 chan 2 mixer:
+        % Create structure with mixer parameters
+        params.Freq        = +4700;      % MHz
+        params.PhaseOffset = 0;          % Degrees
+        params.MixerMode   = 'IQ->Real'; % 'Real->Real'|'IQ->Real'
+        params.MixerType   = 'Fine';     % 'Fine'|'Coarse'
+    
+        % Set mixer parameters and program the board
+        [error_flag, data, msg] = Avnet_RFSoC_Explorer('DAC_mixer', 1, 2, params);
+        [error_flag, data, msg] = Avnet_RFSoC_Explorer('DAC_program', 1);
+
+    More examples are located in the /scripts folder.
 
 
 Otava DTRX2 mmWave API Help (ZCU208 only)
