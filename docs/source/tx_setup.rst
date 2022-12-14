@@ -151,6 +151,11 @@ In this particular case, we set the signal peak amplitude at -2dBFS, and set the
     :scale: 50%
 
 
+For reference also, here is another ACLR plot, for a 400MHz 5GNR Test Model 1.1. Again, no CFR has been applied here and this result was obtained with -6dB DAC back-off and -7dB attenuation setting for the RF DSA.
+
+.. image:: images_tx_setup/TX1_TM1p1_400MHz_11dBPAR_4p3GIF_7dBDSA_m6p4dBFS.png
+    :scale: 50%
+
 
 
 Power-Down procedure 
