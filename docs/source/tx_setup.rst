@@ -4,7 +4,7 @@ Transmitter Configuration and Operation
 In this procedure, we will go over the steps to program and configure the ZCU208+DTRX2 radio kit in **transmit mode**. The DTRX2 card transmitters will be run in their default states, operating at a default RF modulation frequency of 25GHz.
 
 The DTRX2 radio card transmit signal chains
-----------------------------------
+-------------------------------------------
 
 The following diagram shows details of the TX signal chains of the DTRX2 card. 
 
@@ -150,6 +150,11 @@ In this particular case, we set the signal peak amplitude at -2dBFS, and set the
 .. image:: images_tx_setup/ACLR_50MHz_TM1p1_25GHz_revB.png
     :scale: 50%
 
+
+For reference also, here is another ACLR plot, for a 400MHz 5GNR Test Model 1.1. Again, no CFR has been applied here and this result was obtained with -6dB DAC back-off and -7dB attenuation setting for the RF DSA.
+
+.. image:: images_tx_setup/TX1_TM1p1_400MHz_11dBPAR_4p3GIF_7dBDSA_m6p4dBFS.png
+    :scale: 50%
 
 
 

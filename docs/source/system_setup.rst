@@ -27,7 +27,7 @@ Required Equipment
 In addition to the mmWave kit, you will need the following.
 
 * Laptop or PC running Windows 10 OS
-* Bench power supply for 12V, 2A min 
+* Bench power supply for 12V, 2Amps min 
 * 40GHz Spectrum analyzer for Transmitter tests
 * 40GHz Signal generator for Receiver tests
 * 1x or more RF coaxial cables (2.92mm to 2.92 or 2.4mm on test equipment)
@@ -231,6 +231,8 @@ Power Up DTRX2
 #. Apply 12V DC power to the DTRX2 card, using the DC barrel jack-to-banana plugs cable provided.
 
 Both D4 and D6 "Power Good" red LEDs should be ON. The idle current drawn from the 12V supply should be about 45mA.
+
+It is recommended to set the current limit of the 12V power supply to 2 amps if running both transmit and receive channels simulateously. Please refer to the datasheet for information as to the specific current draw in either transmit or receive mode.
 
 In the next sections you will power up the TX and RX signal chains using RFSoC Explorer and observe the green RX PLL LOCK and TX PLL LOCK LEDs turn ON, as shown in this image.
 

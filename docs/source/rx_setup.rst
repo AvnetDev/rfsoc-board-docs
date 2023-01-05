@@ -42,11 +42,11 @@ From the RFSOC Explorer application, go to the **“Otava DTRX”** tab in the R
 
 The average current drawn on the 12V supply should then be about **530mA**. 
 
-By defaults, both RX channels should be ON, and in the following state:
+By default, both RX channels should be ON, and in the following state:
 
--  The default RF center frequency is set to 25GHz and the RX PLL is programmed to an LO at 14.4GHz, for a default IF center frequency of 3.8GHz.
+-  The default RF center frequency is set to 25GHz and the RX PLL is programmed to an LO at 14.4GHz for an IF center frequency of 3.8GHz, or 14.35GHz for an IF at 3.7GHz. 
 -	 The RX PLL visual lock indicator D2 should be lit (green LED on the DTRX2 card)
--	 Both RX channel 1 and channel 2 are enabled and powered
+-	 Both RX channel 1 and channel 2 are enabled and powered up
 -	 Both Ch1 and Ch2 RF attenuators are set to **max attenuation** at -14dB for the mmW DSA and -31.75dB for the IF DSA
 
 ZCU208 RFSOC ADC configuration and signal capture
