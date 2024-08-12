@@ -8,6 +8,7 @@ Avnet Wideband mmWave Radio Dev Kit for RFSoC Gen-3
        :scale: 50%
 
 | 
+
     `Avnet RFSoC Explorer MATLAB Toolbox <https://avnet.me/rfsoc-explorer>`_
 
     `Product Page <https://avnet.me/rfsoc-mmwave>`_
@@ -22,6 +23,7 @@ Avnet 5G mmWave Phased Array Antenna Module Development Platform
        :scale: 50%
 
 |
+
     `Avnet RFSoC Explorer MATLAB Toolbox <https://avnet.me/rfsoc-explorer>`_
 
     `Product Page <https://avnet.me/5g-mmwave-paam-platform>`_
