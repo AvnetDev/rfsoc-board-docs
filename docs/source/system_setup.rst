@@ -14,6 +14,7 @@ The Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 is ideal for pro
 
 Kit Includes
 ^^^^^^^^^^^^
+
 * Xilinx Zynq UltraScale+ RFSoC ZCU208 Evaluation Kit (full OEM kit)
 * Otava DTRX2 mmWave Radio Daughtercard
 * DC barrel jack to banana plug cable for DTRX2
