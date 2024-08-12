@@ -186,7 +186,7 @@ Use this method when connecting the ZCU208 directly to your PC.
 .. image:: images_system_setup/laptop-ip.jpg
 
 
-Start RFSoC Explorer
+Start Avnet RFSoC Explorer
 --------------------
 
 1. Open MATLAB, go to the APPS tab, and click the icon.
@@ -214,6 +214,24 @@ If a TCP/IP connection cannot be established with the board, the app reports "DI
     :scale: 75%
     :align: center
 
+Avnet RFSoC Explorer - ADC/DAC Memory Considerations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The RFSoC Programmable Logic (PL) design implemented on the ZCU208 imposes a few constraints on the DAC replay waveform and the ADC capture buffer.
+
+**RF-DAC**
+
+* BRAM can play unique waveforms to each channel in a tile
+* PL-DDR is single broadcast. User selects which RF-DAC tiles receive the waveform
+* PL-DDR can broadcast to multiple tiles while other tiles use BRAM
+
+**RF-ADC**
+
+* BRAM mode: tiles captured simultaneously
+* BRAM captures occur at full rate
+* User selects which tiles are streamed to PL-DDR
+* PL-DDR captures occur sequentially
+* DDR captures are limited to Fsbb = 2.25 GSPS
+* PL-DDR mode in dual ADC architectures renders Real Mode unavailable
 
 Configure System Reference Clocks
 ----------------------------------
