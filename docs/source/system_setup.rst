@@ -1,24 +1,23 @@
 System Setup
 ============
 
-This document will show you how to get started with the `Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 <https://www.avnet.com/rfsoc-mmw>`_. Follow the step-by-step instructions to assemble the kit, setup your computer, and use Avnet RFSoC Explorer® in MATLAB to configure the Otava DTRX2 Dual Transceiver mmWave Radio Card, generate and acquire signals.
+This document will show you how to get started with the `Avnet Wideband mmWave Radio Development Platform for RFSoC Gen-3 <https://www.avnet.com/rfsoc-mmw>`_. Follow the step-by-step instructions to assemble the platform, setup your computer, and use Avnet RFSoC Explorer® in MATLAB to configure the Otava DTRX2 Dual Transceiver mmWave Radio Card, generate and acquire signals.
 
 .. image:: images_system_setup/zcu208_dtrx2_kit.png
 
-Kit Overview
+Platform Overview
 ------------
 
-The Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 is ideal for prototyping RF applications in mmW bands including 5G NR FR2, wireless backhaul, as well as K/Ka band radar and SATCOM. This platform combines the Otava DTRX2 Dual Transceiver mmWave Radio Card — jointly developed by Otava and Avnet — with the Xilinx Zynq ® UltraScale+ ™ RFSoC ZCU208 Evaluation Kit.
+The Avnet Wideband mmWave Radio Development Platform for RFSoC Gen-3 is ideal for prototyping RF applications in mmW bands including 5G NR FR2, wireless backhaul, as well as K/Ka band radar and SATCOM. This platform combines the Otava DTRX2 Dual Transceiver mmWave Radio Card — jointly developed by Otava and Avnet — with the Xilinx Zynq ® UltraScale+ ™ RFSoC ZCU208 Evaluation Kit.
 
-.. warning:: This kit can radiate radio frequency energy and has not been tested for CE, FCC, or IC compliance. The intended use is for demonstration, engineering development, or evaluation purposes. See :doc:`Regulatory Compliance Information <./compliance>`
+.. warning:: This platform can radiate radio frequency energy and has not been tested for CE, FCC, or IC compliance. The intended use is for demonstration, engineering development, or evaluation purposes. See :doc:`Regulatory Compliance Information <./compliance>`
 
-Kit Includes
+Platform Components
 ^^^^^^^^^^^^
 
-* Xilinx Zynq UltraScale+ RFSoC ZCU208 Evaluation Kit (full OEM kit)
-* Otava DTRX2 mmWave Radio Daughtercard
-* DC barrel jack to banana plug cable for DTRX2
-* Avnet RFSoC Explorer for MATLAB and Simulink
+* `Xilinx Zynq UltraScale+ RFSoC ZCU208 Evaluation Kit (full OEM kit) <https://www.xilinx.com/products/boards-and-kits/zcu208.html>`_
+* `Otava DTRX2 mmWave Radio Daughtercard <https://www.avnet.com/shop/us/products/avnet-engineering-services/aes-lpa-otvdtrx2-b-g-3074457345644541033/>`_
+* `Avnet RFSoC Explorer for MATLAB and Simulink (free download) <https://www.mathworks.com/matlabcentral/fileexchange/73665-avnet-rfsoc-explorer>`_
 
 .. image:: images_system_setup/mmw_full_kit_PB.jpg
 
@@ -26,7 +25,7 @@ Kit Includes
 Required Equipment
 ------------------
 
-In addition to the mmWave kit, you will need the following.
+In addition to the mmWave platform, you will need the following.
 
 * Laptop or PC running Windows 10 OS
 * Bench power supply for 12V, 2Amps min 
@@ -34,10 +33,10 @@ In addition to the mmWave kit, you will need the following.
 * 40GHz Signal generator for Receiver tests
 * 1x or more RF coaxial cables (2.92mm to 2.92 or 2.4mm on test equipment)
 * 3x 2.92mm male 50-ohm terminations (rated for 40GHz, 0.5W or higher)
-* 1x RF SMA coax cable to connect the CLK104 Reference Clock (in the kit)
+* 1x RF SMA coax cable to connect the CLK104 Reference Clock (in the ZCU208 kit)
 * 1x 10dB SMA coaxial attenuator or low-pass filter (for DTRX2 Ref clock input port)
 * Optional – n258, n257, n260 band-pass filters
-* 12V jack to banana plug DC electrical wires (in the kit)
+* 12V jack to banana plug DC electrical wires (in in Otava DTRX2 kit)
 
 
 Install RFSoC Explorer

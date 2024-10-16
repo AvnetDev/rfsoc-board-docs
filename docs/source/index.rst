@@ -1,7 +1,7 @@
 Getting Started Guides for Avnet RFSoC Platforms
 ==================================================================================
 
-Avnet Wideband mmWave Radio Dev Kit for RFSoC Gen-3
+Avnet Wideband mmWave Radio Dev Platform for RFSoC Gen-3
 ----------------------------------------------------------------------------------
 
   .. image:: images_toc/zcu208_dtrx2.jpg

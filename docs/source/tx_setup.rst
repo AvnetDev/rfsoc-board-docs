@@ -1,7 +1,7 @@
 Transmitter Configuration and Operation
 =======================================
 
-In this procedure, we will go over the steps to program and configure the ZCU208+DTRX2 radio kit in **transmit mode**. The DTRX2 card transmitters will be run in their default states, operating at a default RF modulation frequency of 25GHz.
+In this procedure, we will go over the steps to program and configure the ZCU208+DTRX2 radio platform in **transmit mode**. The DTRX2 card transmitters will be run in their default states, operating at a default RF modulation frequency of 25GHz.
 
 The DTRX2 radio card transmit signal chains
 -------------------------------------------
