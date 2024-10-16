@@ -1,4 +1,4 @@
-Getting Started with Avnet's Wideband mmWave Radio Dev Kit for RFSoC Gen-3
+Getting Started with Avnet's Wideband mmWave Radio Dev Platform for RFSoC Gen-3
 ===========================================================================
 .. toctree::
    :maxdepth: 2

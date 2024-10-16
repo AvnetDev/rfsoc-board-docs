@@ -1,7 +1,7 @@
 Receivers Configuration and Operation
 ====================================
 
-In this procedure, we will go over the steps to program and configure the ZCU208+DTRX2 radio kit in **receive mode**. The DTRX2 card receivers will be run in their default states, operating at a default RF demodulation frequency of 25GHz.
+In this procedure, we will go over the steps to program and configure the ZCU208+DTRX2 radio platform in **receive mode**. The DTRX2 card receivers will be run in their default states, operating at a default RF demodulation frequency of 25GHz.
 
 The DTRX2 radio card signal chains
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
