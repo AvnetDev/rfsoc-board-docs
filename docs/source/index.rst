@@ -1,35 +1,27 @@
-Getting Started Guides for Avnet RFSoC Platforms
+Getting Started Guides for Tria Technologies RFSoC Platforms
 ==================================================================================
+Tria Technologies (an Avnet company) creates unique solutions for phased array radar, mmWave beamforming, 5G massive MIMO and quantum computing through collaboration with industry partners AMD, Fujikura, MathWorks, Otava, Rhode & Schwarz, and Samtec.
 
-Avnet Wideband mmWave Radio Dev Platform for RFSoC Gen-3
+
+Tria Wideband mmWave Radio Development Platform for RFSoC Gen-3
 ----------------------------------------------------------------------------------
 
   .. image:: images_toc/zcu208_dtrx2.jpg
        :scale: 50%
 
-| 
+* `Platform Details <https://avnet.me/rfsoc-mmwave>`_
+* `RFSoC Explorer MATLAB Toolbox <https://avnet.me/rfsoc-explorer>`_
+* :doc:`User Guide </mmw_kit_toc>`
 
-    `Avnet RFSoC Explorer MATLAB Toolbox <https://avnet.me/rfsoc-explorer>`_
-
-    `Product Page <https://avnet.me/rfsoc-mmwave>`_
-
-    :doc:`mmw_kit_toc`
-
-
-Avnet 5G mmWave Phased Array Antenna Module Development Platform
+Tria 5G mmWave Phased Array Antenna Module Development Platform
 ----------------------------------------------------------------------------------
 
   .. image:: images_toc/zcu208_FjkPaam.jpg
        :scale: 50%
 
-|
-
-    `Avnet RFSoC Explorer MATLAB Toolbox <https://avnet.me/rfsoc-explorer>`_
-
-    `Product Page <https://avnet.me/5g-mmwave-paam-platform>`_
-
-    `5G mmWave PAAM Development Platform User Guide <https://github.com/Avnet/Fujikura-beamforming>`_
-
+  * `User Guide <https://github.com/Avnet/Fujikura-beamforming>`_
+  * `Platform Details <https://avnet.me/5g-mmwave-paam-platform>`_
+  * `RFSoC Explorer MATLAB Toolbox <https://avnet.me/rfsoc-explorer>`_
 
 
    
