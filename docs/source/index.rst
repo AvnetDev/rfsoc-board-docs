@@ -1,27 +1,26 @@
-Getting Started Guides for Tria Technologies RFSoC Platforms
+Tria Technologies RFSoC Platforms - Getting Started Guides
 ==================================================================================
-Tria Technologies (an Avnet company) creates unique solutions for phased array radar, mmWave beamforming, 5G massive MIMO and quantum computing through collaboration with industry partners AMD, Fujikura, MathWorks, Otava, Rhode & Schwarz, and Samtec.
+Tria Technologies (an Avnet company) creates unique solutions for phased array radar, mmWave beamforming, 5G massive MIMO and quantum computing through collaboration with our industry partners. `Learn more. <https://www.avnet.com/wps/portal/us/products/avnet-boards/applications/rfsoc-and-mmwave/>`_
 
-
-Tria Wideband mmWave Radio Development Platform for RFSoC Gen-3
+Wideband mmWave Radio Development Platform for RFSoC Gen-3
 ----------------------------------------------------------------------------------
 
   .. image:: images_toc/zcu208_dtrx2.jpg
        :scale: 50%
 
-* `Platform Details <https://avnet.me/rfsoc-mmwave>`_
-* `RFSoC Explorer MATLAB Toolbox <https://avnet.me/rfsoc-explorer>`_
-* :doc:`User Guide </mmw_kit_toc>`
+  * :doc:`Get Started </mmw_kit_toc>`
+  * `View Platform Features <https://avnet.me/rfsoc-mmwave>`_
+  * `Learn about RFSoC Explorer MATLAB Toolbox <https://avnet.me/rfsoc-explorer>`_
 
-Tria 5G mmWave Phased Array Antenna Module Development Platform
+5G mmWave Phased Array Antenna Module Development Platform
 ----------------------------------------------------------------------------------
 
   .. image:: images_toc/zcu208_FjkPaam.jpg
        :scale: 50%
 
-  * `User Guide <https://github.com/Avnet/Fujikura-beamforming>`_
-  * `Platform Details <https://avnet.me/5g-mmwave-paam-platform>`_
-  * `RFSoC Explorer MATLAB Toolbox <https://avnet.me/rfsoc-explorer>`_
+  * `Get Started <https://github.com/Avnet/Fujikura-beamforming>`_
+  * `View Platform Features <https://avnet.me/5g-mmwave-paam-platform>`_
+  * `Learn about RFSoC Explorer MATLAB Toolbox <https://avnet.me/rfsoc-explorer>`_
 
 
    
