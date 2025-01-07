@@ -49,9 +49,8 @@ Get help on a specific API:
 
       Related API_function **ADC_program**
 
-
-     Support & Documentation
-
+    
+`Support & Documentation <https://www.mathworks.com/matlabcentral/fileexchange/73665-avnet-rfsoc-explorer>`_
 
 
 Main API help
@@ -165,8 +164,6 @@ Main API help
   
     More API examples are located in the /test folder.
  
-    `Support & Documentation <https://www.mathworks.com/matlabcentral/fileexchange/73665-avnet-rfsoc-explorer>`_
-
 
 Otava DTRX2 mmWave API Help
 -----------------------------------------
@@ -234,8 +231,6 @@ Otava DTRX2 mmWave API Help
             RX_IF_DSA_Ch1_Attenuation, parameter = RX I/F DSA Channel 1 Attenuation (dB), range 0 ... 32 dB of positive attenuation (- gain) in 1/2 dB step
             RX_RF_DSA_Ch2_Attenuation, parameter = RX RF DSA Channel 2 Attenuation (dB)
             RX_IF_DSA_Ch2_Attenuation, parameter = RX I/F DSA Channel 2 Attenuation (dB)
-
-        `Support & Documentation <https://www.mathworks.com/matlabcentral/fileexchange/73665-avnet-rfsoc-explorer>`_
 
 Fujikura 28GHz Phased Array Antenna Moduel (PAAM) API help
 -----------------------------------------

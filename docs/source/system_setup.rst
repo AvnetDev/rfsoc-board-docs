@@ -189,14 +189,17 @@ Use this method when connecting the ZCU208 directly to your PC.
 Start RFSoC Explorer
 --------------------
 
-1. Open MATLAB, go to the APPS tab, and click the icon.
+1. Start application with the following API command: 
 
-.. image:: images_system_setup/rfsocX_app_start.png
-
-.. note:: Beginning in RFSoC Explorer v2.0, the app can also be started with the following API command: 
    ``RFSoC_Explorer('startup');``
 
 .. image:: images_system_setup/rfsocX_main_tab.jpg
+
+   Select "ZCU208 + Otava DTRX2 mmWave RF Front-end" from the board menu:
+
+.. image:: images_system_setup/rfsocX_board_menu.jpg
+
+.. note:: The board can be selected using the API  ``RFSoC_Explorer('startup','board_id',4);``
 
 2. On the Main tab, under "System", enter the IP address of the ZCU208. The default board addess is: **169.254.10.2**.
 
