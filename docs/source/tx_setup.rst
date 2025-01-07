@@ -140,7 +140,7 @@ When selecting **MATLAB File**, the tool can process .mat files that contain any
 
 .. image:: images_tx_setup/DAC_waveform_selection.png
 
-.. note::  **When loading and playing your own .mat complex signal vectors:**  The Xilinx RF Evaluation Tool programmable logic is designed to process 16-sample vectors between the PS and the PL. Therefore it is recommended to size the Matlab formated signals as multiple of 16 samples. This avoids automatic zero-padding by the RFSOC Explorer tool, which may show up as transition spurs in the frequency domain with short waveforms.
+.. note::  **When loading and playing your own .mat complex signal vectors:**  The AMD RF Evaluation Tool programmable logic is designed to process 16-sample vectors between the PS and the PL. Therefore it is recommended to size the Matlab formated signals as multiple of 16 samples. This avoids automatic zero-padding by the RFSOC Explorer tool, which may show up as transition spurs in the frequency domain with short waveforms.
 
 .. note:: To also avoid automatic resampling of the .mat waveform, set the DAC rate and interpolation rate according to the waveform sampling rate, BEFORE loading the signal. For instance, if the waveform samping rate is 614.4MHz and the target DAC rate is 6.144GHz, make sure you set the interpolation rate at 10x before loading the waveform. 
 

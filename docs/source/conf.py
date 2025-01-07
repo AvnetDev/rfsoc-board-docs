@@ -46,8 +46,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'mmw-docs'
-copyright = '2021, Avnet'
-author = 'Avnet'
+copyright = '2025, Tria Technologies'
+author = 'Tria Technologies'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -141,8 +141,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'mmw-docs.tex', 'Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 Getting Started Guide',
-     'Avnet', 'manual'),
+    (master_doc, 'mmw-docs.tex', 'Tria Wideband mmWave Radio Development Kit for RFSoC Gen-3 Getting Started Guide',
+     'Tria', 'manual'),
 ]
 
 
@@ -151,7 +151,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'mmw-docs', 'Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 Getting Started Guide',
+    (master_doc, 'mmw-docs', 'Tria Wideband mmWave Radio Development Kit for RFSoC Gen-3 Getting Started Guide',
      [author], 1)
 ]
 
@@ -162,7 +162,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'mmw-docs', 'Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 Getting Started Guide',
-     author, 'mmw-docs', 'Avnet Wideband mmWave Radio Development Kit for RFSoC Gen-3 Getting Started Guide',
+    (master_doc, 'mmw-docs', 'Tria Wideband mmWave Radio Development Kit for RFSoC Gen-3 Getting Started Guide',
+     author, 'mmw-docs', 'Tria Wideband mmWave Radio Development Kit for RFSoC Gen-3 Getting Started Guide',
      'Miscellaneous'),
 ]

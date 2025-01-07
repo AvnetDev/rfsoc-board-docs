@@ -1,23 +1,23 @@
 System Setup
 ============
 
-This document will show you how to get started with the `Avnet Wideband mmWave Radio Development Platform for RFSoC Gen-3 <https://www.avnet.com/rfsoc-mmw>`_. Follow the step-by-step instructions to assemble the platform, setup your computer, and use Avnet RFSoC Explorer® in MATLAB to configure the Otava DTRX2 Dual Transceiver mmWave Radio Card, generate and acquire signals.
+This document will show you how to get started with the `Tria Wideband mmWave Radio Development Platform for RFSoC Gen-3 <https://www.avnet.com/rfsoc-mmw>`_. Follow the step-by-step instructions to assemble the platform, setup your computer, and use RFSoC Explorer® in MATLAB to configure the Otava DTRX2 Dual Transceiver mmWave Radio Card, generate and acquire signals.
 
 .. image:: images_system_setup/zcu208_dtrx2_kit.png
 
 Platform Overview
 ------------
 
-The Avnet Wideband mmWave Radio Development Platform for RFSoC Gen-3 is ideal for prototyping RF applications in mmW bands including 5G NR FR2, wireless backhaul, as well as K/Ka band radar and SATCOM. This platform combines the Otava DTRX2 Dual Transceiver mmWave Radio Card — jointly developed by Otava and Avnet — with the Xilinx Zynq ® UltraScale+ ™ RFSoC ZCU208 Evaluation Kit.
+The Tria Wideband mmWave Radio Development Platform for RFSoC Gen-3 is ideal for prototyping RF applications in mmW bands including 5G NR FR2, wireless backhaul, as well as K/Ka band radar and SATCOM. This platform combines the Otava DTRX2 Dual Transceiver mmWave Radio Card — jointly developed by Otava and Tria — with the AMD Zynq™ UltraScale+™ RFSoC ZCU208 Evaluation Kit.
 
 .. warning:: This platform can radiate radio frequency energy and has not been tested for CE, FCC, or IC compliance. The intended use is for demonstration, engineering development, or evaluation purposes. See :doc:`Regulatory Compliance Information <./compliance>`
 
 Platform Components
 ^^^^^^^^^^^^
 
-* `Xilinx Zynq UltraScale+ RFSoC ZCU208 Evaluation Kit (full OEM kit) <https://www.xilinx.com/products/boards-and-kits/zcu208.html>`_
+* `AMD Zynq UltraScale+ RFSoC ZCU208 Evaluation Kit (full OEM kit) <https://www.xilinx.com/products/boards-and-kits/zcu208.html>`_
 * `Otava DTRX2 mmWave Radio Daughtercard <https://www.avnet.com/shop/us/products/avnet-engineering-services/aes-lpa-otvdtrx2-b-g-3074457345644541033/>`_
-* `Avnet RFSoC Explorer for MATLAB and Simulink (free download) <https://www.mathworks.com/matlabcentral/fileexchange/73665-avnet-rfsoc-explorer>`_
+* `RFSoC Explorer for MATLAB and Simulink (free download) <https://www.mathworks.com/matlabcentral/fileexchange/73665-avnet-rfsoc-explorer>`_
 
 .. image:: images_system_setup/mmw_full_kit_PB.jpg
 
@@ -36,13 +36,13 @@ In addition to the mmWave platform, you will need the following.
 * 1x RF SMA coax cable to connect the CLK104 Reference Clock (in the ZCU208 kit)
 * 1x 10dB SMA coaxial attenuator or low-pass filter (for DTRX2 Ref clock input port)
 * Optional – n258, n257, n260 band-pass filters
-* 12V jack to banana plug DC electrical wires (in in Otava DTRX2 kit)
+* 12V jack to banana plug DC electrical wires (in the Otava DTRX2 kit)
 
 
 Install RFSoC Explorer
 ----------------------
 
-Avnet RFSoC Explorer provides native connection to MATLAB ® and Simulink ®, featuring graphical control of the platform and intuitive APIs for programmatic access.
+RFSoC Explorer provides native connection to MATLAB® and Simulink®, featuring graphical control of the platform and intuitive APIs for programmatic access.
 
 .. image:: images_system_setup/rfsocX-concept.jpg
 
@@ -55,9 +55,9 @@ Your computer will need the following MathWorks software.
 * Signal Processing Toolbox
 * Install one of the following support packages from the MATLAB Add-On Manager
   
-    * Communications Toolbox Support Package for Xilinx Zynq-Based Radio
-    * HDL Coder Support Package for Xilinx RFSoC Devices
+    * HDL Coder Support Package for Xilinx FPGA and SoC Devices
     * SoC Blockset Support Package for Xilinx Devices
+    * SoC Blockset Support Package for AMD FPGA and SoC Devices
 
 Optional toolboxes for working with standards-compliant waveforms in RFSoC Explorer
 
@@ -68,7 +68,7 @@ Optional toolboxes for working with standards-compliant waveforms in RFSoC Explo
 
 RFSoC Explorer installs easily using the MATLAB Add-Ons store.
 
-1)	From **MATLAB > Add-Ons**, search for **Avnet RFSoC Explorer** and click install
+1)	From **MATLAB > Add-Ons**, search for **RFSoC Explorer** and click install
 2)	From **MATLAB > Add-Ons**, search for **Communications Toolbox Support Package for Xilinx Zynq-Based Radio** and click install
 3) If prompted, click **Setup Later**
 
@@ -78,13 +78,13 @@ RFSoC Explorer installs easily using the MATLAB Add-Ons store.
 Hardware Setup
 ----------------
 
-The Xilinx ZCU208 Evaluation Kit has many jumpers and switches that are shipped with default states, which do not need to change for this tutorial. In the following steps we describe the minimal configuration. For a comprehensive setup guide, refer to the `ZCU208 Software Install and Board Setup <https://www.xilinx.com/support/documentation/boards_and_kits/zcu208/2020_1/xtp607-zcu208-setup-c-2020-1.pdf>`_
+The AMD ZCU208 Evaluation Kit has many jumpers and switches that are shipped with default states, which do not need to change for this tutorial. In the following steps we describe the minimal configuration. For a comprehensive setup guide, refer to the `ZCU208 Software Install and Board Setup <https://www.xilinx.com/support/documentation/boards_and_kits/zcu208/2020_1/xtp607-zcu208-setup-c-2020-1.pdf>`_
 
 .. image:: images_system_setup/hw-setup.jpg
 
 **Refer to the diagram above when making the following connections.**
 
-#. Connect the Xilinx CLK104 module to the ZCU208 with the included screws
+#. Connect the AMD CLK104 module to the ZCU208 with the included screws
 #. Connect the Otava DTRX2 mmWave Card to the ZCU208 with the included screws
 #. Connect the ZCU208 to your PC with Ethernet and USB cables. *USB is optional for terminal access to Linux running on the board.*
 #. **DO NOT CONNECT POWER TO THE DTRX2 CARD** (this will be done later)
@@ -114,12 +114,12 @@ Follow these steps to load a custom SD card boot image for the ZCU208, allowing 
 
 2. Use one of the links below to download the SD boot image archive.
 
-Avnet RFSoC Explorer v2.2.0 and earlier
+RFSoC Explorer v2.2.0 and earlier
 
     * ZCU208 ES1 SD Card Image - `avnet_rfsocX_zcu208es1_boot_v1_0.zip <https://avnet.me/rfsocX_zcu208es1_boot_v1_0>`_
     * ZCU208 Production SD Card Image - `avnet_rfsocX_zcu208_boot_v1_0.zip <https://avnet.me/rfsocX_zcu208_boot_v1_0>`_
 
-Avnet RFSoC Explorer v2.3.0 and later
+RFSoC Explorer v2.3.0 and later
 
     * ZCU208 ES1 SD Card Image - `avnet_rfsocX_zcu208es1_boot_v1_1.zip <https://avnet.me/rfsocX_zcu208es1_boot_v1_1>`_
     * ZCU208 Production SD Card Image - `avnet_rfsocX_zcu208_boot_v1_1.zip <https://avnet.me/rfsocX_zcu208_boot_v1_1>`_
@@ -132,7 +132,7 @@ Avnet RFSoC Explorer v2.3.0 and later
 
 4. Safely eject the SD card from the PC and replace in the ZCU208
 
-.. note:: **Design File Information** The software and firmware contained in the SD Card image are biult upon the `Xilinx RF Data Converter Evaluation Tool (v2020.2) <https://www.xilinx.com/products/silicon-devices/soc/rfsoc.html#resources>`_. Our customizations are accomplished via TCL scripts for the Xilinx Vivado project, and several modifications to the Xilinx PetaLinux BSP. The source code for these modifications is freely available. We are in the process of moving our private GitHub repo to public status so that the project can be cloned/forked/etc.
+.. note:: **Design File Information** The software and firmware contained in the SD Card image are biult upon the `AMD RF Data Converter Evaluation Tool (v2020.2) <https://www.xilinx.com/products/silicon-devices/soc/rfsoc.html#resources>`_. Our customizations are accomplished via TCL scripts for the AMD Vivado project, and several modifications to the AMD PetaLinux BSP. The source code for these modifications is freely available. We are in the process of moving our private GitHub repo to public status so that the project can be cloned/forked/etc.
 
 
 Boot & Network Configuration
@@ -186,7 +186,7 @@ Use this method when connecting the ZCU208 directly to your PC.
 .. image:: images_system_setup/laptop-ip.jpg
 
 
-Start Avnet RFSoC Explorer
+Start RFSoC Explorer
 --------------------
 
 1. Open MATLAB, go to the APPS tab, and click the icon.
@@ -194,7 +194,7 @@ Start Avnet RFSoC Explorer
 .. image:: images_system_setup/rfsocX_app_start.png
 
 .. note:: Beginning in RFSoC Explorer v2.0, the app can also be started with the following API command: 
-   ``Avnet_RFSoC_Explorer('startup');``
+   ``RFSoC_Explorer('startup');``
 
 .. image:: images_system_setup/rfsocX_main_tab.jpg
 
@@ -214,7 +214,7 @@ If a TCP/IP connection cannot be established with the board, the app reports "DI
     :scale: 75%
     :align: center
 
-Avnet RFSoC Explorer - ADC/DAC Memory Considerations
+RFSoC Explorer - ADC/DAC Memory Considerations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The RFSoC Programmable Logic (PL) design implemented on the ZCU208 imposes a few constraints on the DAC replay waveform and the ADC capture buffer.
 
@@ -236,7 +236,7 @@ The RFSoC Programmable Logic (PL) design implemented on the ZCU208 imposes a few
 Configure System Reference Clocks
 ----------------------------------
 
-The CLK104 module provides an ultra low-noise, wideband RF clock source for the ZCU208 RF-ADCs and RF-DACs. We use the RFSoC Explorer to configure CLK104 to ouptut a coherent 122.88MHz reference for the DTRX2 LO PLLs. For more information refer to `Xilinx UG1437 - CLK104 RF Clock Add-onCard <https://www.xilinx.com/support/documentation/boards_and_kits/zcu216/ug1437-clk104.pdf>`_
+The CLK104 module provides an ultra low-noise, wideband RF clock source for the ZCU208 RF-ADCs and RF-DACs. We use the RFSoC Explorer to configure CLK104 to ouptut a coherent 122.88MHz reference for the DTRX2 LO PLLs. For more information refer to `AMD UG1437 - CLK104 RF Clock Add-onCard <https://www.xilinx.com/support/documentation/boards_and_kits/zcu216/ug1437-clk104.pdf>`_
 
 The following picture shows the details of the CLK104 module. The bottom SMA is the 122.88MHz reference clock output to be connected to the DTRX2 input reference clock port. And the other SMA connector above, labelled "INPUT_REF_CLK" is a provision for an external 10MHz master reference clock signal (used for synchronization with test equipments for instance).  
 When an external 10MHz is not provided, the CLK104 module needs to be configured to use the internal 10MHz TCXO, as decribed in the steps below.
@@ -244,7 +244,7 @@ When an external 10MHz is not provided, the CLK104 module needs to be configured
 .. figure:: images_system_setup/CLK104.png
     :align: center
 
-    Xilinx CLK104 System Clock Module
+    AMD CLK104 System Clock Module
 
 #. Go to the RFSoC Explorer Main tab
 #. Select **CLK104 Configuration > 122.88MHz REFCLKOUT_10MHz TCXO REF**

@@ -1,2 +1,2 @@
 # rfsoc-board-docs
-Avnet document repo for RFSoC-based boards &amp; modules
+Tria Technlogies document repo for RFSoC-based boards &amp; modules
