@@ -203,7 +203,7 @@ Start RFSoC Explorer
 .. image:: images_system_setup/rfsocX_board_menu.jpg
    
 
-.. note:: The board can be selected using the API  ``RFSoC_Explorer('startup','board_id',4);``
+.. note:: The board can be selected using the API  ``RFSoC_Explorer('startup','board_id',4)``
 
 3. On the Main tab, under "System", enter the IP address of the ZCU208. The default board addess is: **169.254.10.2**.
 
