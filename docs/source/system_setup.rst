@@ -199,7 +199,9 @@ Start RFSoC Explorer
 
 2. Select "ZCU208 + Otava DTRX2 mmWave RF Front-end" from the board menu:
 
+
 .. image:: images_system_setup/rfsocX_board_menu.jpg
+   
 
 .. note:: The board can be selected using the API  ``RFSoC_Explorer('startup','board_id',4);``
 
