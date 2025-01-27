@@ -1,4 +1,14 @@
-  
+.. toctree::
+   :maxdepth: 3
+   :hidden:
+   :caption: OTAVA MMWAVE KIT
+
+   system_setup
+   tx_setup
+   rx_setup
+   api_help
+   compliance
+   
   .. image:: images_toc/TRIA-Color-CMYK.png
        :scale: 50%
        :align: center
