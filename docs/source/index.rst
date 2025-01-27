@@ -1,3 +1,5 @@
+Tria Technologies RFSoC Platforms - Getting Started Guides
+==================================================================================
 .. toctree::
    :maxdepth: 3
    :hidden:
@@ -8,15 +10,13 @@
    rx_setup
    api_help
    compliance
-   
+
+Tria Technologies (an Avnet company) creates unique solutions for phased array radar, mmWave beamforming, 5G massive MIMO and quantum computing through collaboration with our industry partners. `Learn more. <https://www.avnet.com/wps/portal/us/products/avnet-boards/applications/rfsoc-and-mmwave/>`_
+
   .. image:: images_toc/TRIA-Color-CMYK.png
        :scale: 50%
        :align: center
-
-Tria Technologies RFSoC Platforms - Getting Started Guides
-==================================================================================
-Tria Technologies (an Avnet company) creates unique solutions for phased array radar, mmWave beamforming, 5G massive MIMO and quantum computing through collaboration with our industry partners. `Learn more. <https://www.avnet.com/wps/portal/us/products/avnet-boards/applications/rfsoc-and-mmwave/>`_
-
+       
 Wideband mmWave Radio Development Platform for RFSoC Gen-3
 ----------------------------------------------------------------------------------
 
