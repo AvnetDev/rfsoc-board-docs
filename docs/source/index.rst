@@ -32,7 +32,7 @@ Wideband mmWave Radio Development Platform for RFSoC Gen-3
   .. image:: images_toc/zcu208_dtrx2.jpg
        :scale: 50%
 
-  * :doc:`Get Started </system_setup>`
+  * :doc:`Get Started <system_setup>`
   * `View Platform Features <https://avnet.me/rfsoc-mmwave>`_
   * `Learn about RFSoC Explorer MATLAB Toolbox <https://avnet.me/rfsoc-explorer>`_
 
